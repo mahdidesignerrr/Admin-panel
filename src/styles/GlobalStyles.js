@@ -1,7 +1,29 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
+@font-face {
+  font-family: Morabba;
+  font-weight: 500;
+  src: url(../fonts/Morabba/Morabba-Medium.ttf);
+  font-display: fallback
+}
+
+@font-face {
+  font-family: Morabba;
+  font-weight: 600;
+  src: url(../fonts/Morabba/Morabba-SemiBold.ttf);
+  font-display: fallback
+}
+
+@font-face {
+  font-family: Morabba;
+  font-weight: 700;
+  src: url(../fonts/Morabba/Morabba-Bold.ttf);
+  font-display: fallback
+}
+
 :root {
+  
   &, &.light-mode {
   /* Grey */
   --color-grey-0: #fff;
@@ -31,11 +53,12 @@ const GlobalStyles = createGlobalStyle`
   --color-red-700: #b91c1c;
   --color-red-800: #991b1b;
 
-  --backdrop-color: rgba(255, 255, 255, 0.1);
+  --backdrop-color: rgba(255, 255, 250, 0.1);
 
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 2.4rem 3.2rem rgba(0, 0, 0, 0.12);
+--shadow-inset: inset 0px 1px 0px rgba(255, 255, 255, 0.08)
   
 
     --image-grayscale: 0;
@@ -70,11 +93,12 @@ const GlobalStyles = createGlobalStyle`
 --color-red-700: #b91c1c;
 --color-red-800: #991b1b;
 
---backdrop-color: rgba(0, 0, 0, 0.3);
+--backdrop-color: #33383fa3;
 
 --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
 --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.3);
 --shadow-lg: 0 2.4rem 3.2rem rgba(0, 0, 0, 0.4);
+--shadow-inset: inset 0px 1px 0px rgba(255, 255, 255, 0.08)
 
 --image-grayscale: 10%;
 --image-opacity: 90%;
@@ -89,13 +113,16 @@ const GlobalStyles = createGlobalStyle`
   --color-brand-700: #4338ca;
   --color-brand-800: #3730a3;
   --color-brand-900: #312e81;
-  
+
+  --border-main-sm: 2px solid rgba(255, 255, 255, 0.2)
+
   --border-radius-tiny: 3px;
   --border-radius-sm: 5px;
   --border-radius-md: 7px;
-  --border-radius-lg: 9px;
+  --border-radius-lg: 3.2rem;
 
-
+  --morabba-500: "Morabba"
+  --filter-blur-md: blur(15px)
 }
 
 *,
@@ -114,7 +141,7 @@ html {
 }
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: "Morabba", sans-serif;
   color: var(--color-grey-700);
 
   transition: color 0.3s, background-color 0.3s;
@@ -182,7 +209,7 @@ img {
   max-width: 100%;
 
   /* For dark mode */
-  filter: grayscale(var(--image-grayscale)) opacity(var(--image-opacity));
+  /* filter: grayscale(var(--image-grayscale)) opacity(var(--image-opacity)); */
 }
 
 `;
