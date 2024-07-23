@@ -16,6 +16,8 @@ import AppLayout from "./ui/AppLayout";
 import { DarkModeProvider } from "./contexts/DarkModeContext";
 import AuthProvider from "./contexts/AuthProvider";
 import Menu from "./ui/Menu";
+import Messages from "./pages/Messages";
+import DiscountedCode from "./pages/DiscountedCode";
 function App() {
    const queryClient = new QueryClient({
       defaultOptions: {
@@ -50,6 +52,9 @@ function App() {
                         <Route path="settings" element={<Settings />} />
                         <Route path="account" element={<Account />} />
                         <Route path="menu" element={<Menu />} />
+                        <Route path="discountedCode" element={<DiscountedCode />} />
+                        <Route path="messages" element={<Messages />} />
+                        <Route path="payment-ways" element={<Messages />} />
                      </Route>
                      <Route path="login" element={<Login />} />
                      <Route path="*" element={<PageNotFound />} />

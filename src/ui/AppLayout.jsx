@@ -3,7 +3,7 @@ import NavbarParent from "./NavbarParent";
 import styled from "styled-components";
 
 const Main = styled.main`
-   padding: 4rem 4.8rem 6.4rem;
+   padding: 4rem;
    /* background-color: var(--color-grey-900); */
    backdrop-filter: blur(15px);
    background-color: #33383f51;
@@ -11,6 +11,7 @@ const Main = styled.main`
    border-top-right-radius: 7rem;
    border-top-left-radius: 7rem;
    width: 100%;
+   border: 1px solid #33383f51;
 `;
 
 const Container = styled.div`

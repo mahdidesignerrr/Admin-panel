@@ -121,6 +121,7 @@ const GlobalStyles = createGlobalStyle`
   --border-radius-md: 7px;
   --border-radius-lg: 3.2rem;
 
+  --shadow-main: 0 0 10px #050505b4
   --morabba-500: "Morabba"
   --filter-blur-md: blur(15px)
 }
