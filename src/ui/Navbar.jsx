@@ -14,11 +14,16 @@ const types = {
    primary: css`
       border: 2.5px solid #33383fa3;
       background-color: #2a2c2f62;
+      height: 9rem !important;
+      @media screen and (min-width: 1000px) {
+         & div h3 {
+            font-size: 2rem;
+         }
+      }
       @media screen and (max-width: 900px) {
          & div h3 {
             display: block !important;
          }
-         height: 10rem !important;
       }
    `,
    secondary: css`
@@ -39,6 +44,7 @@ const types = {
       }
 
       @media screen and (max-width: 900px) {
+         height: 6rem;
          & div h3 {
             display: none;
          }
@@ -50,6 +56,7 @@ const types = {
             & div h3 {
                display: block !important;
                font-size: 1.4rem;
+               padding-top: 6px;
             }
             & div div {
                display: block;
@@ -58,7 +65,6 @@ const types = {
                gap: 0.4rem;
             }
          }
-         height: 6rem;
       }
    `,
 };
@@ -96,6 +102,7 @@ const MenuContent = styled(motion.div)`
    align-items: center;
    gap: 1rem;
    font-size: 1.5rem;
+   transition: opacity 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
    &:hover {
       opacity: 1 !important;
    }
@@ -121,11 +128,11 @@ const MenuTitle = styled(motion.h3)`
    animation: showTitle 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 
    @keyframes showTitle {
-      0%{
+      0% {
          opacity: 0;
          transform: translateY(7px);
       }
-      100%{
+      100% {
          opacity: 1;
          transform: translateY(0rem);
       }
@@ -142,6 +149,7 @@ function Navbar({ icon, name, link, type = "secondary" }) {
       <Motion>
          <Menu
             type={type}
+            onClick={() => navigate(`/${link}`, { replace: true })}
             className={isActive ? "active" : ""}
             initial="initial"
             animate="animate"
@@ -150,7 +158,6 @@ function Navbar({ icon, name, link, type = "secondary" }) {
             transition={{ duration: 0.3 }}
          >
             <MenuContent
-               onClick={() => navigate(link)}
                initial={{ opacity: 0 }}
                animate={isActive ? { opacity: 1 } : { opacity: 0.7 }}
                exit={{ opacity: 0 }}

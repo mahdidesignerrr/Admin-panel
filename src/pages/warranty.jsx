@@ -1,4 +1,4 @@
-function warranty() {
+function Warranty() {
   return (
     <div>
       
@@ -6,4 +6,4 @@ function warranty() {
   )
 }
 
-export default warranty
+export default Warranty

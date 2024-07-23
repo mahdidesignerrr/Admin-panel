@@ -3,6 +3,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import GlobalStyles from "./styles/GlobalStyles";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import { DarkModeProvider } from "./contexts/DarkModeContext";
 import Dashboard from "./pages/Dashboard";
 import Orders from "./pages/Orders";
 import OrderDetails from "./pages/OrderDetails";
@@ -10,14 +11,24 @@ import Products from "./pages/Products";
 import Comments from "./pages/Comments";
 import Settings from "./pages/Settings";
 import Account from "./pages/Account";
-import Login from "../../Best-Project-Idea/frontend/src/pages/UsersValidation/Login";
+import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
 import AppLayout from "./ui/AppLayout";
-import { DarkModeProvider } from "./contexts/DarkModeContext";
 import AuthProvider from "./contexts/AuthProvider";
 import Menu from "./ui/Menu";
 import Messages from "./pages/Messages";
 import DiscountedCode from "./pages/DiscountedCode";
+import Users from "./pages/Users";
+import Transports from "./pages/Transports";
+import Warranty from "./pages/warranty";
+import Brands from "./pages/Brands";
+import Categories from "./pages/Categories";
+import Variants from "./pages/Variants";
+import WebsiteCustomization from "./pages/WebsiteCustomization";
+import TodoList from "./pages/TodoList";
+import Message from "./pages/message";
+import Club from "./pages/Club";
+import Reports from "./pages/Reports";
 function App() {
    const queryClient = new QueryClient({
       defaultOptions: {
@@ -31,9 +42,9 @@ function App() {
    return (
       <DarkModeProvider>
          <QueryClientProvider client={queryClient}>
-            <ReactQueryDevtools initialIsOpen={false}/>
-               <GlobalStyles />
-               <AuthProvider>
+            <ReactQueryDevtools initialIsOpen={false} />
+            <GlobalStyles />
+            <AuthProvider>
                <BrowserRouter>
                   <Routes>
                      <Route path="/" element={<AppLayout />}>
@@ -44,7 +55,7 @@ function App() {
                         <Route path="dashboard" element={<Dashboard />} />
                         <Route path="orders" element={<Orders />} />
                         <Route
-                           path="order/:bookingId"
+                           path="order/:orderId"
                            element={<OrderDetails />}
                         />
                         <Route path="products" element={<Products />} />
@@ -52,36 +63,58 @@ function App() {
                         <Route path="settings" element={<Settings />} />
                         <Route path="account" element={<Account />} />
                         <Route path="menu" element={<Menu />} />
-                        <Route path="discountedCode" element={<DiscountedCode />} />
-                        <Route path="messages" element={<Messages />} />
+                        <Route
+                           path="discountedCode"
+                           element={<DiscountedCode />}
+                        />
+                        <Route path="messages" element={<Messages />}>
+                           <Route
+                              path="messages/:messageId"
+                              element={<Message />}
+                           />
+                        </Route>
                         <Route path="payment-ways" element={<Messages />} />
+                        <Route path="users" element={<Users />} />
+                        <Route path="transports" element={<Transports />} />
+                        <Route path="transports" element={<Transports />} />
+                        <Route path="warranty" element={<Warranty />} />
+                        <Route path="brands" element={<Brands />} />
+                        <Route path="categories" element={<Categories />} />
+                        <Route path="variants" element={<Variants />} />
+                        <Route path="club" element={<Club />} />
+                        <Route path="reports" element={<Reports />} />
+                        <Route
+                           path="websiteCustomization"
+                           element={<WebsiteCustomization />}
+                        />
+                        <Route path="todoList" element={<TodoList />} />
                      </Route>
                      <Route path="login" element={<Login />} />
                      <Route path="*" element={<PageNotFound />} />
                   </Routes>
                </BrowserRouter>
-               </AuthProvider>
+            </AuthProvider>
 
-               <Toaster
-                  position="top-center"
-                  gutter={12}
-                  containerStyle={{ margin: "8px" }}
-                  toastOptions={{
-                     success: {
-                        duration: 3000,
-                     },
-                     error: {
-                        duration: 5000,
-                     },
-                     style: {
-                        fontSize: "16px",
-                        maxWidth: "500px",
-                        padding: "16px 24px",
-                        backdropFilter: "blur(10px)",
-                        color: "var(--color-grey-700)",
-                     },
-                  }}
-               />
+            <Toaster
+               position="top-center"
+               gutter={12}
+               containerStyle={{ margin: "8px" }}
+               toastOptions={{
+                  success: {
+                     duration: 3000,
+                  },
+                  error: {
+                     duration: 5000,
+                  },
+                  style: {
+                     fontSize: "16px",
+                     maxWidth: "500px",
+                     padding: "16px 24px",
+                     backdropFilter: "blur(10px)",
+                     color: "var(--color-grey-700)",
+                  },
+               }}
+            />
          </QueryClientProvider>
       </DarkModeProvider>
    );

@@ -29,14 +29,14 @@ const MenuContainer = styled.div`
    border-radius: var(--border-radius-lg);
    border: 2px solid #33383fa3;
    @media screen and (max-width: 900px) {
-         position: absolute;
-         bottom: 6rem;
-         width: 94vw;
-         left: 50%;
-         right: 50%;
-         transform: translate(-50%, 50%);
-         gap: 2vw;
-         backdrop-filter: blur(15px);
+      position: absolute;
+      bottom: 6rem;
+      width: 94vw;
+      left: 50%;
+      right: 50%;
+      transform: translate(-50%, 50%);
+      gap: 2vw;
+      backdrop-filter: blur(15px);
    }
 `;
 
@@ -82,23 +82,23 @@ function NavbarParent() {
                <path
                   d="M3.1709 7.43994L12.0009 12.5499L20.7709 7.46994"
                   stroke="var(--color-grey-900)"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                />
                <path
                   d="M12.001 21.61V12.54"
                   stroke="var(--color-grey-900)"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                />
                <path
                   d="M9.93111 2.48004L4.59111 5.44004C3.38111 6.11004 2.39111 7.79004 2.39111 9.17004V14.82C2.39111 16.2 3.38111 17.88 4.59111 18.55L9.93111 21.52C11.0711 22.15 12.9411 22.15 14.0811 21.52L19.4211 18.55C20.6311 17.88 21.6211 16.2 21.6211 14.82V9.17004C21.6211 7.79004 20.6311 6.11004 19.4211 5.44004L14.0811 2.47004C12.9311 1.84004 11.0711 1.84004 9.93111 2.48004Z"
                   stroke="var(--color-grey-900)"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                />
             </svg>
          ),
@@ -117,37 +117,37 @@ function NavbarParent() {
                <path
                   d="M3.00977 11.22V15.71C3.00977 20.2 4.80977 22 9.29977 22H14.6898C19.1798 22 20.9798 20.2 20.9798 15.71V11.22"
                   stroke="var(--color-grey-900)"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                />
                <path
                   d="M12 12C13.83 12 15.18 10.51 15 8.68L14.34 2H9.66999L8.99999 8.68C8.81999 10.51 10.17 12 12 12Z"
                   stroke="var(--color-grey-900)"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                />
                <path
                   d="M18.3098 12C20.3298 12 21.8098 10.36 21.6098 8.35L21.3298 5.6C20.9698 3 19.9698 2 17.3498 2H14.2998L14.9998 9.01C15.1698 10.66 16.6598 12 18.3098 12Z"
                   stroke="var(--color-grey-900)"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                />
                <path
                   d="M5.63988 12C7.28988 12 8.77988 10.66 8.93988 9.01L9.15988 6.8L9.63988 2H6.58988C3.96988 2 2.96988 3 2.60988 5.6L2.33988 8.35C2.13988 10.36 3.61988 12 5.63988 12Z"
                   stroke="var(--color-grey-900)"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                />
                <path
                   d="M12 17C10.33 17 9.5 17.83 9.5 19.5V22H14.5V19.5C14.5 17.83 13.67 17 12 17Z"
                   stroke="var(--color-grey-900)"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                />
             </svg>
          ),
@@ -166,24 +166,24 @@ function NavbarParent() {
                <path
                   d="M8.5 19H8C4 19 2 18 2 13V8C2 4 4 2 8 2H16C20 2 22 4 22 8V13C22 17 20 19 16 19H15.5C15.19 19 14.89 19.15 14.7 19.4L13.2 21.4C12.54 22.28 11.46 22.28 10.8 21.4L9.3 19.4C9.14 19.18 8.77 19 8.5 19Z"
                   stroke="var(--color-grey-900)"
-                  stroke-width="1.5"
-                  stroke-miterlimit="10"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.5"
+                  strokeMiterlimit="10"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                />
                <path
                   d="M7 8H17"
                   stroke="var(--color-grey-900)"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                />
                <path
                   d="M7 13H13"
                   stroke="var(--color-grey-900)"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                />
             </svg>
          ),

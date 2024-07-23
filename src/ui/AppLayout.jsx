@@ -3,7 +3,7 @@ import NavbarParent from "./NavbarParent";
 import styled from "styled-components";
 
 const Main = styled.main`
-   padding-top: 8rem;
+   padding-top: 22rem; // this field
    backdrop-filter: blur(15px);
    background-color: #33383f51;
    height: 88vh;
@@ -26,11 +26,16 @@ const Container = styled.div`
 
    @media screen and (max-width: 770px) {
       background: url("../../public/Gradient-For-Project-Mobile.jpg") 50% 0%;
+
+      & main {
+         border-top-right-radius: 5rem;
+         border-top-left-radius: 5rem;
+      }
    }
 `;
 
 const SpaceBottom = styled.div`
-   height: 15rem;
+   height: 22rem; // this field
 `;
 
 function AppLayout() {
@@ -39,7 +44,7 @@ function AppLayout() {
          <NavbarParent />
          <Main>
             <Outlet />
-            <SpaceBottom/>
+            <SpaceBottom />
          </Main>
       </Container>
    );

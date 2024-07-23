@@ -4,21 +4,21 @@ const GlobalStyles = createGlobalStyle`
 @font-face {
   font-family: Morabba;
   font-weight: 500;
-  src: url(../fonts/Morabba/Morabba-Medium.ttf);
+  src: url("./fonts/Morabba/Morabba-Medium.ttf");
   font-display: fallback
 }
 
 @font-face {
   font-family: Morabba;
   font-weight: 600;
-  src: url(../fonts/Morabba/Morabba-SemiBold.ttf);
+  src: url("./fonts/Morabba/Morabba-SemiBold.ttf");
   font-display: fallback
 }
 
 @font-face {
   font-family: Morabba;
   font-weight: 700;
-  src: url(../fonts/Morabba/Morabba-Bold.ttf);
+  src: url("./fonts/Morabba/Morabba-Bold.ttf");
   font-display: fallback
 }
 
@@ -113,6 +113,8 @@ const GlobalStyles = createGlobalStyle`
   --color-brand-700: #4338ca;
   --color-brand-800: #3730a3;
   --color-brand-900: #312e81;
+
+  --color-back: #33383f51
 
   --border-main-sm: 2px solid rgba(255, 255, 255, 0.2)
 
