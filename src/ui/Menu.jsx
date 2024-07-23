@@ -34,21 +34,21 @@ const MenuCategories = styled(motion.div)`
 
 const MenuTitleSection = styled(motion.div)`
    display: flex;
-   justify-content: end;
    align-items: center;
+   width: 100%;
    gap: 2rem;
-
-   &:first-child {
-      font-size: 1.5rem;
-   }
 `;
 
 const MenuTitleLine = styled(motion.div)`
-   width: auto;
    height: 1.5px;
-   border-radius: var(--border-radius-lg);
+   flex-grow: 1;
    background-color: var(--color-grey-200);
    opacity: 0.5;
+`;
+
+const MenuTitle = styled.h2`
+   flex-shrink: 0;
+   font-size: 2.3rem;
 `;
 
 const menus = {
@@ -525,7 +525,7 @@ function Menu() {
             <MenuCategories variants={itemVariants} key={category}>
                <MenuTitleSection>
                   <MenuTitleLine />
-                  <h2>{category}</h2>
+                  <MenuTitle>{category}</MenuTitle>
                </MenuTitleSection>
                <MenuContainer key={category}>
                   {menus[category].map((menu) => (
