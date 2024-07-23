@@ -12,9 +12,6 @@ const StyledNavbar = styled.div`
    display: flex;
    align-items: center;
    justify-content: space-between;
-   @media screen and (max-width: 770px) {
-      display: none;
-   }
 `;
 
 const LogoContainer = styled.div`
@@ -27,8 +24,20 @@ const MenuContainer = styled.div`
    align-items: center;
    gap: 1.5rem;
    flex-grow: 3;
+   backdrop-filter: blur(15px);
+   background-color: #0000002b;
    border-radius: var(--border-radius-lg);
    border: 2px solid #33383fa3;
+   @media screen and (max-width: 900px) {
+         position: absolute;
+         bottom: 6rem;
+         width: 94vw;
+         left: 50%;
+         right: 50%;
+         transform: translate(-50%, 50%);
+         gap: 2vw;
+         backdrop-filter: blur(15px);
+   }
 `;
 
 const AccountContainer = styled.div`

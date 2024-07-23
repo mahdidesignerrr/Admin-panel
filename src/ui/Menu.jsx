@@ -16,10 +16,12 @@ const MenuContainer = styled.div`
    display: flex;
    justify-content: center;
    align-items: center;
-   gap: 2rem;
-   border-radius: var(--border-radius-lg);
-   border: 2px solid #33383fa3;
+   gap: 3%;
    width: 65vw;
+
+   @media screen and (max-width: 900px) {
+      width: 95vw;
+   }
 `;
 
 const MenuCategories = styled(motion.div)`
@@ -28,11 +30,26 @@ const MenuCategories = styled(motion.div)`
    align-items: end;
    gap: 1rem;
    flex-direction: column;
+`;
+
+const MenuTitleSection = styled(motion.div)`
+   display: flex;
+   justify-content: end;
+   align-items: center;
+   gap: 2rem;
 
    &:first-child {
-      font-size: 1%.3;
+      font-size: 1.5rem;
    }
-`
+`;
+
+const MenuTitleLine = styled(motion.line)`
+   width: auto;
+   height: 1.5px;
+   border-radius: var(--border-radius-lg);
+   background-color: var(--color-grey-200);
+   opacity: 0.5;
+`;
 
 const menus = {
    "مدیریت کاربران": [
@@ -369,7 +386,7 @@ const menus = {
    ],
    "ابزارها و گزارشات": [
       {
-         title: "لیست کار ها(todoList)",
+         title: "لیست کار ها",
          icon: (
             <svg
                width="25"
@@ -404,7 +421,7 @@ const menus = {
          type: "primary",
       },
       {
-         title: "لورا Ai",
+         title: "Ai لورا",
          icon: (
             <svg
                width="24"
@@ -487,13 +504,13 @@ const containerVariants = {
    visible: {
       opacity: 1,
       transition: {
-         staggerChildren: 0.2,
+         staggerChildren: 0.3,
       },
    },
 };
 
 const itemVariants = {
-   hidden: { opacity: 0, y: 20 },
+   hidden: { opacity: 0, y: 40 },
    visible: { opacity: 1, y: 0 },
 };
 
@@ -505,11 +522,15 @@ function Menu() {
          variants={containerVariants}
       >
          {Object.keys(menus).map((category) => (
-            <MenuCategories  variants={itemVariants}>
-               <h2>{category}</h2>
+            <MenuCategories variants={itemVariants}>
+               <MenuTitleSection>
+                  <MenuTitleLine />
+                  <h2>{category}</h2>
+               </MenuTitleSection>
                <MenuContainer key={category}>
                   {menus[category].map((menu) => (
                      <Navbar
+                        type="primary"
                         key={menu.link}
                         name={menu.title}
                         icon={menu.icon}

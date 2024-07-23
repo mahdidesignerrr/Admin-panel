@@ -1,52 +1,94 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
+import { motion } from "framer-motion";
+import Motion from "./Motion";
+
+// Animation settings
+const slideIn = {
+   initial: { scale: 0.9, opacity: 0 },
+   animate: { scale: 1, opacity: 1, ease: "circOut" },
+   exit: { scale: 0.9, opacity: 0 },
+};
 
 const types = {
    primary: css`
-      height: 6rem;
+      border: 2.5px solid #33383fa3;
+      background-color: #2a2c2f62;
+      @media screen and (max-width: 900px) {
+         & div h3 {
+            display: block !important;
+         }
+         height: 10rem !important;
+      }
    `,
    secondary: css`
-      height: 4.2rem;
+      height: 4.3rem;
+      border-right: 2.5px solid #33383fa3;
+      border-left: 2.5px solid #33383fa3;
+
+      &:first-child {
+         border-left: none;
+      }
+      &:last-child {
+         border-right: none;
+      }
+
+      &.active {
+         background-color: var(--color-brand-600);
+         color: var(--color-grey-900);
+      }
+
+      @media screen and (max-width: 900px) {
+         & div h3 {
+            display: none;
+         }
+
+         &.active {
+            & div svg {
+               display: none;
+            }
+            & div h3 {
+               display: block !important;
+               font-size: 1.4rem;
+            }
+            & div div {
+               display: block;
+            }
+            & div {
+               gap: 0.4rem;
+            }
+         }
+         height: 6rem;
+      }
    `,
 };
 
-const Menu = styled.div`
-   backdrop-filter: var(--filter-blue-md);
-   border-left: 2.5px solid #33383fa3;
-   border-right: 2.5px solid #33383fa3;
+const Menu = styled(motion.div)`
+   z-index: 10;
    box-shadow: var(--shadow-inset);
-
-   ${(props) => types[props.type]}
    width: 100%;
    display: flex;
    align-items: center;
    justify-content: center;
    text-align: center;
+   flex-direction: column;
    border-radius: var(--border-radius-lg);
-   color: var(--color-gray-900);
    cursor: pointer;
+   transition: all 0.3s ease-out;
+   height: 6rem;
+   ${(props) => types[props.type]}
 
-   &:first-child {
-      border-left: none;
-   }
-   &:last-child {
-      border-right: none;
-   }
-
-   &:hover {
-      background: #33383fa3;
-   }
-   &.active {
-      background: var(--color-brand-700);
+   @media screen and (max-width: 900px) {
+      & div svg {
+         height: 2.8rem;
+         width: 2.8rem;
+      }
+      height: 6rem;
    }
 `;
 
-Menu.defaultProps = {
-   type: "secondary",
-};
-
-const MenuContent = styled.div`
-   color: var(--color-grey-900);
+const MenuContent = styled(motion.div)`
+   color: inherit;
    height: 100%;
    width: 100%;
    display: flex;
@@ -54,39 +96,84 @@ const MenuContent = styled.div`
    align-items: center;
    gap: 1rem;
    font-size: 1.5rem;
-   @media screen and (max-width: 770px) {
-      :last-child {
-         display: none;
+   &:hover {
+      opacity: 1 !important;
+   }
+
+   @media screen and (max-width: 900px) {
+      flex-direction: column-reverse;
+      font-size: 1.3rem;
+   }
+`;
+
+const MenuActive = styled(motion.div)`
+   width: 5px;
+   height: 5px;
+   border-radius: 25px;
+   background-color: #00ff00;
+   margin: 0;
+   padding: 0;
+   display: none;
+   transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+`;
+
+const MenuTitle = styled(motion.h3)`
+   animation: showTitle 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+   @keyframes showTitle {
+      0%{
+         opacity: 0;
+         transform: translateY(7px);
+      }
+      100%{
+         opacity: 1;
+         transform: translateY(0rem);
       }
    }
 `;
 
 function Navbar({ icon, name, link, type = "secondary" }) {
-   const Navigate = useNavigate();
+   const navigate = useNavigate();
    const { pathname } = useLocation();
+
+   const isActive = pathname === `/${link}`;
+
    return (
-      <Menu type={type} className={pathname === `/${link}` ? "active" : ""}>
-         <MenuContent onClick={() => Navigate(link)}>
-            <h3>{name}</h3>
-            {icon || (
-               <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+      <Motion>
+         <Menu
+            type={type}
+            className={isActive ? "active" : ""}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            variants={slideIn}
+            transition={{ duration: 0.3 }}
+         >
+            <MenuContent
+               onClick={() => navigate(link)}
+               initial={{ opacity: 0 }}
+               animate={isActive ? { opacity: 1 } : { opacity: 0.7 }}
+               exit={{ opacity: 0 }}
+               transition={{ duration: 0.3 }}
+            >
+               <MenuActive
+                  initial={{ scale: 0 }}
+                  animate={isActive ? { scale: 1 } : { scale: 0 }}
+                  exit={{ scale: 0 }}
+                  transition={{ duration: 0.3 }}
+               />
+               <MenuTitle
+                  initial={{ opacity: 0 }}
+                  animate={isActive ? { opacity: 1 } : { opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
                >
-                  <path
-                     d="M21 18.9993V10.2042C21 9.20084 20.4987 8.26383 19.6641 7.70725L13.1094 3.33601C12.4376 2.888 11.5624 2.888 10.8906 3.33601L4.3359 7.70725C3.5013 8.26383 3 9.20084 3 10.2042V18.9993C3 20.1043 3.89543 21 5 21H8.5C9.05228 21 9.5 20.5521 9.5 19.9997V17.4988C9.5 16.3939 10.3954 15.4982 11.5 15.4982H12.5C13.6046 15.4982 14.5 16.3939 14.5 17.4988V19.9997C14.5 20.5521 14.9477 21 15.5 21H19C20.1046 21 21 20.1043 21 18.9993Z"
-                     stroke="var(--color-grey-900)"
-                     stroke-width="2"
-                     stroke-linecap="round"
-                     stroke-linejoin="round"
-                  />
-               </svg>
-            )}
-         </MenuContent>
-      </Menu>
+                  {name}
+               </MenuTitle>
+               {icon}
+            </MenuContent>
+         </Menu>
+      </Motion>
    );
 }
 
