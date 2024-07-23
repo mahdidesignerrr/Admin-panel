@@ -1,11 +1,9 @@
 import { Outlet } from "react-router-dom";
 import NavbarParent from "./NavbarParent";
 import styled from "styled-components";
-import Motion from "./Motion";
 
 const Main = styled.main`
    padding: 4rem;
-   /* background-color: var(--color-grey-900); */
    backdrop-filter: blur(15px);
    background-color: #33383f51;
    height: 88vh;
