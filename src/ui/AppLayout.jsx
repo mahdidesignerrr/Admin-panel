@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import NavbarParent from "./NavbarParent";
 import styled from "styled-components";
+import Motion from "./Motion";
 
 const Main = styled.main`
    padding: 4rem;
@@ -31,12 +32,12 @@ const Container = styled.div`
 
 function AppLayout() {
    return (
-      <Container>
-         <NavbarParent/>
-         <Main>
-            <Outlet />
-         </Main>
-      </Container>
+         <Container>
+            <NavbarParent />
+            <Main>
+                  <Outlet />
+            </Main>
+         </Container>
    );
 }
 

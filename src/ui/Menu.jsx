@@ -1,24 +1,25 @@
 import styled from "styled-components";
 import Navbar from "./Navbar";
+import { motion } from "framer-motion";
 
-const StyledMenus = styled.div`
-   width: 100%;
-   height: 100%;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   gap: 4rem;
-   flex-direction: column;
+const StyledMenus = styled(motion.div)`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  flex-direction: column;
 `;
 
-const MenuContainer = styled.div`
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   gap: 1.5rem;
-   border-radius: var(--border-radius-lg);
-   border: 2px solid #33383fa3;
-   width: 100%;
+const MenuContainer = styled(motion.div)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  border-radius: var(--border-radius-lg);
+  border: 2px solid #33383fa3;
+  width: 100%;
 `;
 
 const menus = [
@@ -458,20 +459,44 @@ const menus = [
       type: "primary",
    },
 ];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: { 
+    opacity: 1, 
+    transition: { 
+      staggerChildren: 0.2 
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 }
+};
+
 function Menu() {
-   const counts = [0, 3, 6, 9, 12, 15,18];
-   return (
-      <StyledMenus>
-         {counts.map((count) => (
-            <MenuContainer>
-               {
-               menus.slice(count, count + 3).map((menu) => (
-               <Navbar name={menu.title} icon={menu.icon} link={menu.link} />
-               ))}
-            </MenuContainer>
-         ))}
-      </StyledMenus>
-   );
+  const counts = [0, 3, 6, 9, 12, 15, 18];
+  return (
+    <StyledMenus
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
+      {counts.map((count) => (
+        <MenuContainer key={count} variants={itemVariants}>
+          {menus.slice(count, count + 3).map((menu) => (
+            <Navbar
+              key={menu.link}
+              name={menu.title}
+              icon={menu.icon}
+              link={menu.link}
+            />
+          ))}
+        </MenuContainer>
+      ))}
+    </StyledMenus>
+  );
 }
 
 export default Menu;
