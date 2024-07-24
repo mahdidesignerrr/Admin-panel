@@ -11,7 +11,6 @@ import Products from "./pages/Products";
 import Comments from "./pages/Comments";
 import Settings from "./pages/Settings";
 import Account from "./pages/Account";
-import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
 import AppLayout from "./ui/AppLayout";
 import AuthProvider from "./contexts/AuthProvider";
@@ -29,6 +28,9 @@ import TodoList from "./pages/TodoList";
 import Message from "./pages/message";
 import Club from "./pages/Club";
 import Reports from "./pages/Reports";
+import AuthLayout from "./pages/AuthLayout";
+import LoginForm from "./features/authentication/LoginForm";
+import ConfirmLoginForm from "./features/authentication/ConfirmLoginForm";
 function App() {
    const queryClient = new QueryClient({
       defaultOptions: {
@@ -89,7 +91,16 @@ function App() {
                         />
                         <Route path="todoList" element={<TodoList />} />
                      </Route>
-                     <Route path="login" element={<Login />} />
+                     <Route path="login" element={<AuthLayout />}>
+                        <Route
+                           index
+                           element={<LoginForm/>}
+                        />
+                        <Route
+                           path="verify/:email"
+                           element={<ConfirmLoginForm/>}
+                        />
+                     </Route>
                      <Route path="*" element={<PageNotFound />} />
                   </Routes>
                </BrowserRouter>
@@ -107,11 +118,16 @@ function App() {
                      duration: 5000,
                   },
                   style: {
+                     fontFamily: "Morabba",
+                     background: "#33383f71",
+                     border: "1.5px solid #33383fa0",
+                     boxShadow: "var(--shadow-sm)",
                      fontSize: "16px",
                      maxWidth: "500px",
-                     padding: "16px 24px",
-                     backdropFilter: "blur(10px)",
-                     color: "var(--color-grey-700)",
+                     padding: "14px 22px",
+                     borderRadius: "50px",
+                     backdropFilter: "blur(15px)",
+                     color: "var(--color-grey-900)",
                   },
                }}
             />
