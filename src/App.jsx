@@ -31,6 +31,7 @@ import Reports from "./pages/Reports";
 import AuthLayout from "./pages/AuthLayout";
 import LoginForm from "./features/authentication/LoginForm";
 import ConfirmLoginForm from "./features/authentication/ConfirmLoginForm";
+import { SkeletonTheme } from "react-loading-skeleton";
 function App() {
    const queryClient = new QueryClient({
       defaultOptions: {
@@ -47,63 +48,62 @@ function App() {
             <ReactQueryDevtools initialIsOpen={false} />
             <GlobalStyles />
             <AuthProvider>
-               <BrowserRouter>
-                  <Routes>
-                     <Route path="/" element={<AppLayout />}>
-                        <Route
-                           index
-                           element={<Navigate replace to="dashboard" />}
-                        />
-                        <Route path="dashboard" element={<Dashboard />} />
-                        <Route path="orders" element={<Orders />} />
-                        <Route
-                           path="order/:orderId"
-                           element={<OrderDetails />}
-                        />
-                        <Route path="products" element={<Products />} />
-                        <Route path="comments" element={<Comments />} />
-                        <Route path="settings" element={<Settings />} />
-                        <Route path="account" element={<Account />} />
-                        <Route path="menu" element={<Menu />} />
-                        <Route
-                           path="discountedCode"
-                           element={<DiscountedCode />}
-                        />
-                        <Route path="messages" element={<Messages />}>
+               <SkeletonTheme baseColor="#313131" highlightColor="#4b4b4b" direction="rtl">
+                  <BrowserRouter>
+                     <Routes>
+                        <Route path="/" element={<AppLayout />}>
                            <Route
-                              path="messages/:messageId"
-                              element={<Message />}
+                              index
+                              element={<Navigate replace to="dashboard" />}
+                           />
+                           <Route path="dashboard" element={<Dashboard />} />
+                           <Route path="orders" element={<Orders />} />
+                           <Route
+                              path="order/:orderId"
+                              element={<OrderDetails />}
+                           />
+                           <Route path="products" element={<Products />} />
+                           <Route path="comments" element={<Comments />} />
+                           <Route path="settings" element={<Settings />} />
+                           <Route path="account" element={<Account />} />
+                           <Route path="menu" element={<Menu />} />
+                           <Route
+                              path="discountedCode"
+                              element={<DiscountedCode />}
+                           />
+                           <Route path="messages" element={<Messages />}>
+                              <Route
+                                 path="messages/:messageId"
+                                 element={<Message />}
+                              />
+                           </Route>
+                           <Route path="payment-ways" element={<Messages />} />
+                           <Route path="users" element={<Users />} />
+                           <Route path="transports" element={<Transports />} />
+                           <Route path="transports" element={<Transports />} />
+                           <Route path="warranty" element={<Warranty />} />
+                           <Route path="brands" element={<Brands />} />
+                           <Route path="categories" element={<Categories />} />
+                           <Route path="variants" element={<Variants />} />
+                           <Route path="club" element={<Club />} />
+                           <Route path="reports" element={<Reports />} />
+                           <Route
+                              path="websiteCustomization"
+                              element={<WebsiteCustomization />}
+                           />
+                           <Route path="todoList" element={<TodoList />} />
+                        </Route>
+                        <Route path="login" element={<AuthLayout />}>
+                           <Route index element={<LoginForm />} />
+                           <Route
+                              path="verify/:email"
+                              element={<ConfirmLoginForm />}
                            />
                         </Route>
-                        <Route path="payment-ways" element={<Messages />} />
-                        <Route path="users" element={<Users />} />
-                        <Route path="transports" element={<Transports />} />
-                        <Route path="transports" element={<Transports />} />
-                        <Route path="warranty" element={<Warranty />} />
-                        <Route path="brands" element={<Brands />} />
-                        <Route path="categories" element={<Categories />} />
-                        <Route path="variants" element={<Variants />} />
-                        <Route path="club" element={<Club />} />
-                        <Route path="reports" element={<Reports />} />
-                        <Route
-                           path="websiteCustomization"
-                           element={<WebsiteCustomization />}
-                        />
-                        <Route path="todoList" element={<TodoList />} />
-                     </Route>
-                     <Route path="login" element={<AuthLayout />}>
-                        <Route
-                           index
-                           element={<LoginForm/>}
-                        />
-                        <Route
-                           path="verify/:email"
-                           element={<ConfirmLoginForm/>}
-                        />
-                     </Route>
-                     <Route path="*" element={<PageNotFound />} />
-                  </Routes>
-               </BrowserRouter>
+                        <Route path="*" element={<PageNotFound />} />
+                     </Routes>
+                  </BrowserRouter>
+               </SkeletonTheme>
             </AuthProvider>
 
             <Toaster

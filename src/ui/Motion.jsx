@@ -4,19 +4,6 @@ function Motion({ children }) {
    return <AnimatePresence mode="wait">{children}</AnimatePresence>;
 }
 
-function MotionOpacity({ children, className = "" }) {
-   return (
-      <motion.div
-         initial={{ opacity: 0 }}
-         animate={{ opacity: 1, transition: { duration: 0.5, ease: "circIn" } }}
-         exit={{ opacity: 0, transition: { duration: 0.3, ease: "circInOut" } }}
-         className={className}
-      >
-         {children}
-      </motion.div>
-   );
-}
-
 function MotionPage({ children, className = "" }) {
    return (
       <motion.div
@@ -62,8 +49,21 @@ function MotionMenuContainer({ children }) {
    return <motion.div variants={itemVariants}>{children}</motion.div>;
 }
 
+const AnimatedWrapper = ({ children, initialProps, animateProps, transitionProps }) => {
+   return (
+       <motion.div
+           initial={initialProps || { opacity: 0, scale: 0.8 }}
+           animate={animateProps || { opacity: 1, scale: 1 }}
+           transition={transitionProps || { duration: 0.5 }}
+       >
+           {children}
+       </motion.div>
+   );
+};
+
+
 Motion.page = MotionPage;
-Motion.opacity = MotionOpacity;
+Motion.wrapper = AnimatedWrapper;
 Motion.menus = MotionMenus;
 Motion.menuContainer = MotionMenuContainer;
 export default Motion;
