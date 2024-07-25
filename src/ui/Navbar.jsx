@@ -13,7 +13,7 @@ const slideIn = {
 const types = {
    primary: css`
       border: 2.5px solid #33383fa3;
-      background-color: #2a2c2f62;
+      background-color: var(--backdrop-color);
       height: 9rem !important;
       @media screen and (min-width: 1000px) {
          & div h3 {
@@ -27,10 +27,9 @@ const types = {
       }
    `,
    secondary: css`
-      height: 4.3rem;
-      border-right: 2.5px solid #33383fa3;
-      border-left: 2.5px solid #33383fa3;
+      height: 4.8rem;
 
+      
       &:first-child {
          border-left: none;
       }
@@ -39,12 +38,13 @@ const types = {
       }
 
       &.active {
+         box-shadow: var(--shadow-outset) !important;
          background-color: var(--color-brand-600);
          color: var(--color-grey-900);
       }
 
       @media screen and (max-width: 900px) {
-         height: 6rem;
+         height: 6.2rem;
          & div h3 {
             display: none;
          }
@@ -80,7 +80,7 @@ const Menu = styled(motion.div)`
    flex-direction: column;
    border-radius: var(--border-radius-lg);
    cursor: pointer;
-   transition: all 0.3s ease-out;
+   transition: all 0.4s ease-out;
    height: 6rem;
    ${(props) => types[props.type]}
 

@@ -40,8 +40,16 @@ const LiveActive = styled.div`
    border-radius: 50%;
    background-color: #0ed768;
    z-index: -1;
-   transition: opacity 0s ease-in 1s; // for don't show this in when the time of loading profile admin
+   animation: notShowOpacity 1.5s ease-in; // for don't show this in when the time of loading profile admin
 
+   @keyframes notShowOpacity {
+      0% {
+         opacity: 0;
+      }
+      100% {
+         opacity: 0;
+      }
+   }
    &:before {
       content: "";
       position: absolute;
@@ -75,14 +83,14 @@ const LiveActive = styled.div`
 function Account() {
    const { adminToken } = useAdminToken();
    const { admin, isLoading } = useAdmin(adminToken);
-   const navigate = useNavigate()
-   let profile = "../../public/defaultLogoM.png";
+   const navigate = useNavigate();
+   let profile = "../../defaultLogoM.png";
    if (admin?.profile) profile = `${apiUrl}/${admin.profile}`;
 
    const handleClick = () => {
-     if(!adminToken) {
-         navigate("/login")
-     }
+      if (!adminToken) {
+         navigate("/login");
+      }
    };
 
    return (

@@ -1,12 +1,26 @@
 import styled from "styled-components";
 
+export const StyledAppLayout = styled.div`
+   background: url("../../Gradient-For-Project.jpg") 100% 0%;
+   width: 100%;
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: end;
+
+   @media screen and (max-width: 770px) {
+      background: url("../../public/Gradient-For-Project-Mobile.jpg") 50% 0%;
+   }
+`;
+
 export const Main = styled.main`
    backdrop-filter: blur(15px);
    background-color: #33383f51;
    border-top-right-radius: 7rem;
    border-top-left-radius: 7rem;
    border: 1px solid #33383f51;
-   padding: 4rem 4.8rem 10rem;
+   padding: 4rem 4.8rem 13rem;
    overflow-y: scroll;
    width: 100%;
 
@@ -33,20 +47,6 @@ export const Main = styled.main`
    @media screen and (max-width: 770px) {
       border-top-right-radius: 5rem;
       border-top-left-radius: 5rem;
-   }
-`;
-
-export const StyledAppLayout = styled.div`
-   background: url("../../public/Gradient-For-Project.jpg") 100% 0%;
-   width: 100%;
-   height: 100vh;
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: end;
-
-   @media screen and (max-width: 770px) {
-      background: url("../../public/Gradient-For-Project-Mobile.jpg") 50% 0%;
    }
 `;
 

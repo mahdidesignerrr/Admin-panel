@@ -24,10 +24,13 @@ const MenuContainer = styled.div`
    align-items: center;
    gap: 1.5rem;
    flex-grow: 3;
-   backdrop-filter: blur(15px);
-   background-color: #0000002b;
+   padding: 4px 4px;
+   backdrop-filter: var(--filter-blur-md);
+   background-color: #000;
+   box-shadow: var(--shadow-outset);
    border-radius: var(--border-radius-lg);
    border: 2px solid #33383fa3;
+
    @media screen and (max-width: 900px) {
       position: absolute;
       bottom: 6rem;
@@ -36,7 +39,6 @@ const MenuContainer = styled.div`
       right: 50%;
       transform: translate(-50%, 50%);
       gap: 2vw;
-      backdrop-filter: blur(15px);
    }
 `;
 

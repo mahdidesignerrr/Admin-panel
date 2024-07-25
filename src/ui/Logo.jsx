@@ -17,7 +17,7 @@ function Logo() {
    return (
    <LogoContents>
      <h2>وبلورا</h2>
-     <StyledLogo src="../../public/logo-weblora-withShadow.png" />
+     <StyledLogo src="../../logo-weblora-withShadow.png" />
    </LogoContents>
    )
 }

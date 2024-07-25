@@ -9,6 +9,8 @@ const Icon = styled.div`
   font-size: 1rem;
   cursor: pointer;
   height: 50px;
+  border: var(--border-main-sm);
+  box-shadow: var(--shadow-inset);
   border-radius: var(--border-radius-lg);
   width: 50px;
   color: var(--color-grey-100)

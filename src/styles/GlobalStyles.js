@@ -53,12 +53,13 @@ const GlobalStyles = createGlobalStyle`
   --color-red-700: #b91c1c;
   --color-red-800: #991b1b;
 
-  --backdrop-color: rgba(255, 255, 250, 0.1);
+  --backdrop-color: rgba(255, 255, 255, 0.26);
 
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 2.4rem 3.2rem rgba(0, 0, 0, 0.12);
---shadow-inset: inset 0px 1px 0px rgba(255, 255, 255, 0.08)
+--shadow-inset: inset 0px 3px 8px 0px rgb(79 0 255 / 60%);
+--shadow-outset: 0px 1px 8px 0px rgb(79 0 255 / 60%);
   
 
     --image-grayscale: 0;
@@ -66,7 +67,7 @@ const GlobalStyles = createGlobalStyle`
   }
   
   &.dark-mode {
-    --color-grey-0: #18212f;
+    --color-grey-0: #000009;
 --color-grey-50: #111827;
 --color-grey-100: #1f2937;
 --color-grey-200: #374151;
@@ -93,39 +94,42 @@ const GlobalStyles = createGlobalStyle`
 --color-red-700: #b91c1c;
 --color-red-800: #991b1b;
 
---backdrop-color: #33383fa3;
+--backdrop-color: rgb(30 30 30 / 26%);
 
 --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
 --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.3);
 --shadow-lg: 0 2.4rem 3.2rem rgba(0, 0, 0, 0.4);
---shadow-inset: inset 0px 1px 0px rgba(255, 255, 255, 0.08)
+--shadow-inset: inset 0px 2px 5px 0px rgb(79 10 250 / 60%);
 
 --image-grayscale: 10%;
 --image-opacity: 90%;
   }
   
   /* Indigo */
-  --color-brand-50: #eef2ff;
-  --color-brand-100: #e0e7ff;
-  --color-brand-200: #c7d2fe;
-  --color-brand-500: #6366f1;
-  --color-brand-600: #4f46e5;
-  --color-brand-700: #4338ca;
-  --color-brand-800: #3730a3;
-  --color-brand-900: #312e81;
+  &{
 
-  --color-back: #33383f51
-
-  --border-main-sm: 2px solid rgba(255, 255, 255, 0.2)
-
-  --border-radius-tiny: 3px;
-  --border-radius-sm: 5px;
-  --border-radius-md: 7px;
-  --border-radius-lg: 3.2rem;
-
-  --shadow-main: 0 0 10px #050505b4
-  --morabba-500: "Morabba"
-  --filter-blur-md: blur(15px)
+    --color-brand-50: #eef2ff;
+    --color-brand-100: #e0e7ff;
+    --color-brand-200: #c7d2fe;
+    --color-brand-500: #6366f1;
+    --color-brand-600: #4f46e5;
+    --color-brand-700: #4338ca;
+    --color-brand-800: #3730a3;
+    --color-brand-900: #312e81;
+    --filter-blur-md: blur(15px);
+  
+    --color-back: #33383f51;
+  
+    --border-main-sm: 2.5px solid #33383fa3;
+  
+    --border-radius-tiny: 3px;
+    --border-radius-sm: 5px;
+    --border-radius-md: 7px;
+    --border-radius-lg: 3.2rem;
+  
+    --shadow-main: 0 0 10px #050505b4
+    --morabba-500: "Morabba"
+  }
 }
 
 *,
