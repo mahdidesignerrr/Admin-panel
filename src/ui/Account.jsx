@@ -70,7 +70,7 @@ const LiveActive = styled.div`
       height: 90%;
       border-radius: 50%;
       background-color: #00ff73;
-      animation: pulse 1.5s ease-in-out infinite;
+      animation: pulse 2s ease-in-out infinite;
       opacity: 0.5;
    }
 
@@ -79,8 +79,8 @@ const LiveActive = styled.div`
          opacity: 0;
          transform: translate(-50%, -50%) scale(1);
       }
-      70% {
-         opacity: 0.6;
+      50% {
+         opacity: 0.5;
          transform: translate(-50%, -50%) scale(1.4);
       }
       100% {

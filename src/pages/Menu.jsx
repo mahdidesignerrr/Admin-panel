@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Navbar from "./Navbar";
+import Navbar from "../ui/Navbar";
 import { motion } from "framer-motion";
 
 const StyledMenus = styled(motion.div)`

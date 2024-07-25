@@ -14,7 +14,7 @@ import Account from "./pages/Account";
 import PageNotFound from "./pages/PageNotFound";
 import AppLayout from "./ui/AppLayout";
 import AuthProvider from "./contexts/AuthProvider";
-import Menu from "./ui/Menu";
+import Menu from "./pages/Menu";
 import Messages from "./pages/Messages";
 import DiscountedCode from "./pages/DiscountedCode";
 import Users from "./pages/Users";
@@ -48,7 +48,11 @@ function App() {
             <ReactQueryDevtools initialIsOpen={false} />
             <GlobalStyles />
             <AuthProvider>
-               <SkeletonTheme baseColor="#313131" highlightColor="#4b4b4b" direction="rtl">
+               <SkeletonTheme
+                  baseColor="#313131"
+                  highlightColor="#4b4b4b"
+                  direction="rtl"
+               >
                   <BrowserRouter>
                      <Routes>
                         <Route path="/" element={<AppLayout />}>
