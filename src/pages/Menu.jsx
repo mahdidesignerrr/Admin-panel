@@ -1,55 +1,4 @@
-import styled from "styled-components";
-import Navbar from "../ui/Navbar";
-import { motion } from "framer-motion";
-
-const StyledMenus = styled(motion.div)`
-   width: 100%;
-   height: 100%;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   gap: 2rem;
-   flex-direction: column;
-`;
-
-const MenuContainer = styled.div`
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   gap: 3%;
-   width: 65vw;
-
-   @media screen and (max-width: 900px) {
-      width: 90vw;
-   }
-`;
-
-const MenuCategories = styled(motion.div)`
-   display: flex;
-   justify-content: center;
-   align-items: end;
-   gap: 1rem;
-   flex-direction: column;
-`;
-
-const MenuTitleSection = styled(motion.div)`
-   display: flex;
-   align-items: center;
-   width: 100%;
-   gap: 2rem;
-`;
-
-const MenuTitleLine = styled(motion.div)`
-   height: 1.5px;
-   flex-grow: 1;
-   background-color: var(--color-grey-200);
-   opacity: 0.5;
-`;
-
-const MenuTitle = styled.h2`
-   flex-shrink: 0;
-   font-size: 2.3rem;
-`;
+import MenuAppLayout from "../features/menu/Menu";
 
 const menus = {
    "مدیریت کاربران": [
@@ -499,48 +448,14 @@ const menus = {
    ],
 };
 
-const containerVariants = {
-   hidden: { opacity: 0 },
-   visible: {
-      opacity: 1,
-      transition: {
-         staggerChildren: 0.3,
-      },
-   },
-};
-
-const itemVariants = {
-   hidden: { opacity: 0, y: 40 },
-   visible: { opacity: 1, y: 0 },
-};
-
 function Menu() {
    return (
-      <StyledMenus
-         initial="hidden"
-         animate="visible"
-         variants={containerVariants}
-      >
-         {Object.keys(menus).map((category) => (
-            <MenuCategories variants={itemVariants} key={category}>
-               <MenuTitleSection>
-                  <MenuTitleLine />
-                  <MenuTitle>{category}</MenuTitle>
-               </MenuTitleSection>
-               <MenuContainer key={category}>
-                  {menus[category].map((menu) => (
-                     <Navbar
-                        type="primary"
-                        key={menu.link}
-                        name={menu.title}
-                        icon={menu.icon}
-                        link={menu.link}
-                     />
-                  ))}
-               </MenuContainer>
-            </MenuCategories>
-         ))}
-      </StyledMenus>
+      <MenuAppLayout menus={menus}>
+            <MenuAppLayout.Categories>
+               <MenuAppLayout.TitleSection />
+               <MenuAppLayout.Container />
+            </MenuAppLayout.Categories>
+      </MenuAppLayout>
    );
 }
 
