@@ -102,6 +102,8 @@ const GlobalStyles = createGlobalStyle`
 --shadow-lg: 0 2rem 2.8rem rgba(0, 0, 0, 0.4);
 --shadow-inset: inset 0px 2px 5px 0px rgb(79 30 255 / 80%);
 
+--icon-color: var(--color-grey-900);
+
 --image-grayscale: 10%;
 --image-opacity: 90%;
   }
