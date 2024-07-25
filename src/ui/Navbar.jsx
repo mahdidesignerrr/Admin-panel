@@ -15,6 +15,11 @@ const types = {
       border: 2.5px solid #33383fa3;
       background-color: var(--backdrop-color);
       height: 9rem !important;
+      box-shadow: var(--shadow-inset), var(--shadow-lg);
+      &:hover {
+         box-shadow: var(--shadow-inset-bot), var(--shadow-sm) !important;
+      }
+
       @media screen and (min-width: 1000px) {
          & div h3 {
             font-size: 2rem;
@@ -38,8 +43,7 @@ const types = {
       }
 
       &.active {
-         box-shadow: var(--shadow-outset) !important;
-         background-color: var(--color-brand-600);
+         box-shadow: var(--shadow-inset-full) !important;
          color: var(--color-grey-900);
       }
 
@@ -84,6 +88,10 @@ const Menu = styled(motion.div)`
    height: 6rem;
    ${(props) => types[props.type]}
 
+   &:hover {
+      box-shadow: var(--shadow-inset-bot);
+   }
+
    @media screen and (max-width: 900px) {
       & div svg {
          height: 2.8rem;
@@ -102,10 +110,6 @@ const MenuContent = styled(motion.div)`
    align-items: center;
    gap: 1rem;
    font-size: 1.5rem;
-   transition: opacity 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-   &:hover {
-      opacity: 1 !important;
-   }
 
    @media screen and (max-width: 900px) {
       flex-direction: column-reverse;
@@ -121,20 +125,20 @@ const MenuActive = styled(motion.div)`
    margin: 0;
    padding: 0;
    display: none;
-   transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+   transition: all 0.3s ease-in-out;
 `;
 
 const MenuTitle = styled(motion.h3)`
-   animation: showTitle 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+   animation: showTitle 0.5s ease-in-out;
 
    @keyframes showTitle {
       0% {
          opacity: 0;
-         transform: translateY(7px);
+         scale: 0.8;
       }
       100% {
          opacity: 1;
-         transform: translateY(0rem);
+         scale: 1;
       }
    }
 `;
@@ -159,7 +163,7 @@ function Navbar({ icon, name, link, type = "secondary" }) {
          >
             <MenuContent
                initial={{ opacity: 0 }}
-               animate={isActive ? { opacity: 1 } : { opacity: 0.7 }}
+               animate={{ opacity: 1 }}
                exit={{ opacity: 0 }}
                transition={{ duration: 0.3 }}
             >
@@ -171,7 +175,7 @@ function Navbar({ icon, name, link, type = "secondary" }) {
                />
                <MenuTitle
                   initial={{ opacity: 0 }}
-                  animate={isActive ? { opacity: 1 } : { opacity: 1 }}
+                  animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
                >

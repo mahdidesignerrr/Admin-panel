@@ -10,15 +10,16 @@ export const StyledAppLayout = styled.div`
    align-items: end;
 
    @media screen and (max-width: 770px) {
-      background: url("../../public/Gradient-For-Project-Mobile.jpg") 50% 0%;
+      background: url("../../Gradient-For-Project-Mobile.jpg") 50% 0%;
    }
 `;
 
 export const Main = styled.main`
    backdrop-filter: blur(15px);
-   background-color: #33383f51;
+   background-color: #24293051;
    border-top-right-radius: 7rem;
    border-top-left-radius: 7rem;
+   box-shadow: var(--shadow-outset);
    border: 1px solid #33383f51;
    padding: 4rem 4.8rem 13rem;
    overflow-y: scroll;
@@ -31,17 +32,17 @@ export const Main = styled.main`
    &::-webkit-scrollbar-track {
       border-radius: 10px;
       margin-top: 55px; /* Adjust this value */
-      border: 2px solid #33383f97;
+      border: 2px solid #3c414896;
    }
    
    &::-webkit-scrollbar-thumb {
-      background: #33383fc5;
+      background: var(--color-grey-300);
       border-radius: 10px;
-      border: 2px solid var(--color-grey-200);
+      border: 2px solid var(--color-grey-100);
    }
 
    &::-webkit-scrollbar-thumb:hover {
-      background: var(--color-grey-700);
+     background: var(--color-grey-200);
    }
 
    @media screen and (max-width: 770px) {

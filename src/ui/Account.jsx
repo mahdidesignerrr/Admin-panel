@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Icon from "./icon";
+import Icon from "./Icon";
 import useAdminToken from "../hooks/getAdminToken";
 import { useAdmin } from "../features/authentication/useAdmin";
 import Skeleton from "react-loading-skeleton";
@@ -23,6 +23,15 @@ const AccountImageWrapper = styled.div`
    display: flex;
    justify-content: center;
    align-items: center;
+   box-shadow: var(--shadow-md);
+   border-radius: var(--border-radius-lg);
+   transition: all 0.3s ease-in-out;
+  &:hover{
+    box-shadow: var(--shadow-outset);
+    & div {
+      opacity: 0;
+    }
+  }
 `;
 
 const AccountImage = styled.img`
@@ -41,6 +50,7 @@ const LiveActive = styled.div`
    background-color: #0ed768;
    z-index: -1;
    animation: notShowOpacity 1.5s ease-in; // for don't show this in when the time of loading profile admin
+   transition: opacity 0.5s ease-in;
 
    @keyframes notShowOpacity {
       0% {

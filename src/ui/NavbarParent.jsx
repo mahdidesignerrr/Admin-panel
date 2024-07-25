@@ -27,7 +27,7 @@ const MenuContainer = styled.div`
    padding: 4px 4px;
    backdrop-filter: var(--filter-blur-md);
    background-color: #000;
-   box-shadow: var(--shadow-outset);
+   box-shadow: var(--shadow-sm);
    border-radius: var(--border-radius-lg);
    border: 2px solid #33383fa3;
 

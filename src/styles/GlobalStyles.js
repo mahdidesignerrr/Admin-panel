@@ -58,9 +58,10 @@ const GlobalStyles = createGlobalStyle`
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 2.4rem 3.2rem rgba(0, 0, 0, 0.12);
---shadow-inset: inset 0px 3px 8px 0px rgb(79 0 255 / 60%);
---shadow-outset: 0px 1px 8px 0px rgb(79 0 255 / 60%);
-  
+--shadow-inset: inset 0px 3px 8px 0px rgb(79 40 255 / 80%);
+--shadow-outset: 0px 1px 8px 0px rgb(79 40 255 / 80%);
+--shadow-inset-bot: inset 0px -2px 8px 0px rgb(79 40 255 / 80%);
+--shadow-inset-full:inset 0px 0px 25px 25px rgb(79 40 255 / 80%);;
 
     --image-grayscale: 0;
   --image-opacity: 100%;
@@ -98,8 +99,8 @@ const GlobalStyles = createGlobalStyle`
 
 --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
 --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.3);
---shadow-lg: 0 2.4rem 3.2rem rgba(0, 0, 0, 0.4);
---shadow-inset: inset 0px 2px 5px 0px rgb(79 10 250 / 60%);
+--shadow-lg: 0 2rem 2.8rem rgba(0, 0, 0, 0.4);
+--shadow-inset: inset 0px 2px 5px 0px rgb(79 30 255 / 80%);
 
 --image-grayscale: 10%;
 --image-opacity: 90%;
