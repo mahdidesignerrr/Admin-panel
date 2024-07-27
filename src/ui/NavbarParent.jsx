@@ -81,9 +81,9 @@ function NavbarParent() {
 
    return (
       <StyledNavbar>
-         <LogoContainer>
-            <Logo />
-         </LogoContainer>
+         <AccountContainer>
+            <Account />
+         </AccountContainer>
          <MenuContainer>
             {menuItems.map((menu) => (
                <Navbar
@@ -94,9 +94,9 @@ function NavbarParent() {
                />
             ))}
          </MenuContainer>
-         <AccountContainer>
-            <Account />
-         </AccountContainer>
+         <LogoContainer>
+            <Logo />
+         </LogoContainer>
       </StyledNavbar>
    );
 }

@@ -33,6 +33,7 @@ export const Main = styled.main`
       border-radius: 10px;
       margin-top: 55px; /* Adjust this value */
       border: 2px solid #3c414896;
+      
    }
    
    &::-webkit-scrollbar-thumb {
@@ -56,6 +57,7 @@ export const Container = styled.div`
    max-width: 130rem;
    margin: 0 auto;
    display: flex;
+   direction: rtl;
    flex-direction: column;
    gap: 2.5rem;
 `;

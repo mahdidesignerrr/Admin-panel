@@ -45,7 +45,9 @@ function DashboardLayout() {
                <ChartContainer>
                   <DataChart/>
                </ChartContainer>
-               <ActivityContainer>ACTIVITY</ActivityContainer>
+               <ActivityContainer>
+                  
+               </ActivityContainer>
             </LeftSection>
             <ReportsContainer>
               <ReportsSection/>
