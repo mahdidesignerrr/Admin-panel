@@ -10,7 +10,7 @@ export const StyledAppLayout = styled.div`
    align-items: end;
 
    @media screen and (max-width: 770px) {
-      background: url("../../Gradient-For-Project-Mobile.jpg") 50% 0%;
+      background: url("../../Gradient-For-Project-Mobile.jpg") 15% 80%;
    }
 `;
 
@@ -21,7 +21,7 @@ export const Main = styled.main`
    border-top-left-radius: 7rem;
    box-shadow: var(--shadow-outset);
    border: 1px solid #33383f51;
-   padding: 4rem 4.8rem 13rem;
+   padding: 3rem 4.8rem 13rem;
    overflow-y: scroll;
    width: 100%;
 
@@ -48,13 +48,14 @@ export const Main = styled.main`
    @media screen and (max-width: 770px) {
       border-top-right-radius: 5rem;
       border-top-left-radius: 5rem;
+      padding: 2.5rem 2.5rem 12rem;
    }
 `;
 
 export const Container = styled.div`
-   max-width: 120rem;
+   max-width: 130rem;
    margin: 0 auto;
    display: flex;
    flex-direction: column;
-   gap: 3.2rem;
+   gap: 2.5rem;
 `;

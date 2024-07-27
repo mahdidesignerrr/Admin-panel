@@ -13,6 +13,9 @@ const StyledNavbar = styled.div`
    display: flex;
    align-items: center;
    justify-content: space-between;
+   @media screen and (max-width: 770px) {
+      padding: 1.2rem 1.5rem;
+   }
 `;
 
 const LogoContainer = styled.div`

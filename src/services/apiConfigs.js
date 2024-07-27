@@ -8,3 +8,9 @@ export async function handleErrorApis (response, message = "خطایی رخ دا
     throw new Error(errorMessage || message);
   }
 }
+
+export const SendToken = (adminToken) => ({ headers: {
+      Authorization: `Bearer ${adminToken}`,
+    }
+  }
+)

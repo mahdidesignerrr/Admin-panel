@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import { DashboardContext, useDataDashboard } from "../../contexts/DashboardContext";
+import ReportsSection from "./ReportsSection";
+import DataChart from "./dataChart";
 
 const StyledDashboardLayout = styled.div`
    display: flex;
@@ -12,37 +15,43 @@ const LeftSection = styled.div`
    justify-content: center;
    align-items: center;
    flex-direction: column;
+   gap: 2rem;
    height: 100%;
-   width: 70%;
+   width: 65%;
 `;
 
 const ChartContainer = styled.div`
-   background: blue;
    height: 50%;
    width: 100%;
 `;
 
 const ActivityContainer = styled.div`
-   background: yellow;
+   /* background: yellow; */
    height: 50%;
    width: 100%;
 `;
 
 const ReportsContainer = styled.div`
-   background: purple;
    height: 100%;
-   width: 30%;
+   width: 35%;
 `;
 
 function DashboardLayout() {
+
    return (
-      <StyledDashboardLayout>
-         <LeftSection>
-            <ChartContainer>CHART</ChartContainer>
-            <ActivityContainer>ACTIVITY</ActivityContainer>
-         </LeftSection>
-         <ReportsContainer>REPORTS</ReportsContainer>
-      </StyledDashboardLayout>
+      <DashboardContext>
+         <StyledDashboardLayout>
+            <ReportsContainer>
+              <ReportsSection/>
+            </ReportsContainer>
+            <LeftSection>
+               <ChartContainer>
+                  <DataChart/>
+               </ChartContainer>
+               <ActivityContainer>ACTIVITY</ActivityContainer>
+            </LeftSection>
+         </StyledDashboardLayout>
+      </DashboardContext>
    );
 }
 

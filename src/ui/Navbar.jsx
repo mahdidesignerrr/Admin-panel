@@ -12,7 +12,7 @@ const slideIn = {
 
 const types = {
    primary: css`
-      border: 2.5px solid #33383fa3;
+      border:var(--border-main-sm);
       background-color: var(--backdrop-color);
       height: 9rem !important;
       box-shadow: var(--shadow-inset), var(--shadow-lg);
@@ -42,9 +42,10 @@ const types = {
          border-right: none;
       }
 
-      &.active {
+      &.Alive {
          box-shadow: var(--shadow-inset-full) !important;
          color: var(--color-grey-900);
+         cursor: auto;
       }
 
       @media screen and (max-width: 900px) {
@@ -53,7 +54,7 @@ const types = {
             display: none;
          }
 
-         &.active {
+         &.Alive {
             & div svg {
                display: none;
             }
@@ -102,7 +103,6 @@ const Menu = styled(motion.div)`
 `;
 
 const MenuContent = styled(motion.div)`
-   color: inherit;
    height: 100%;
    width: 100%;
    display: flex;
@@ -154,7 +154,7 @@ function Navbar({ icon, name, link, type = "secondary" }) {
          <Menu
             type={type}
             onClick={() => navigate(`/${link}`, { replace: true })}
-            className={isActive ? "active" : ""}
+            className={isActive ? "Alive" : ""}
             initial="initial"
             animate="animate"
             exit="exit"
@@ -181,7 +181,7 @@ function Navbar({ icon, name, link, type = "secondary" }) {
                >
                   {name}
                </MenuTitle>
-               {icon}
+               {icon && icon}
             </MenuContent>
          </Menu>
       </Motion>
