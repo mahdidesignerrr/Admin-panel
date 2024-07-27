@@ -7,7 +7,7 @@ const StyledFilter = styled.div`
    box-shadow: var(--shadow-sm);
    backdrop-filter: var(--filter-blur-md);
    border-radius: var(--border-radius-lg);
-   padding: 0.3rem;
+   padding: 0.5rem;
    display: flex;
    flex-direction: row-reverse;
    gap: 1rem;
@@ -22,7 +22,7 @@ const FilterButton = styled.button`
       $isActive &&
       css`
          background-color: var(--color-brand-600);
-         color: var(--color-brand-50);
+         color: var(--color-grey-900);
          cursor: auto;
       `}
 
@@ -38,7 +38,7 @@ const FilterButton = styled.button`
 
    &:hover:not(:disabled) {
       box-shadow: var(--shadow-inset-bot);
-      color: var(--color-brand-50);
+      color: var(--color-grey-900);
    }
 `;
 

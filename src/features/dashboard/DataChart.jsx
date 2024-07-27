@@ -18,11 +18,13 @@ const StyledSalesChart = styled(DashboardBox)`
    grid-column: 1 / -1;
    width: 100%;
    height: 100%;
+   position: relative;
    /* Hack to change grid line colors */
    & .recharts-cartesian-grid-horizontal line,
    & .recharts-cartesian-grid-vertical line {
       stroke: var(--color-grey-300);
    }
+
 `;
 
 const colors = {
@@ -69,13 +71,14 @@ TooltipItem.defaultProps = {
 };
 
 const SalesChart = () => {
-   const { isLoading, data } = useDataDashboard();
+   const { isError, isLoading, data } = useDataDashboard();
 
    return (
       <StyledSalesChart>
-         {isLoading ? (
+         {!isError && isLoading ? (
             <SpinnerMini />
          ) : (
+            isError ? "Something wrong - error fetch" :
             <ResponsiveContainer height={300} width="100%">
                <AreaChart data={data.currentMetrics.resultsDays}>
                   {/* <GradientDefs /> */}
@@ -89,7 +92,6 @@ const SalesChart = () => {
                      tick={{ fill: colors.text, fontSize: 12 }}
                      tickLine={false}
                      axisLine={false}
-                     interval={1}
                      direction="rtl"
                      tickFormatter={(value) => value}
                   />
@@ -98,9 +100,12 @@ const SalesChart = () => {
                      tick={{ fill: colors.text, fontSize: 12 }}
                      tickLine={false}
                      axisLine={false}
+                     fontFamily="poppins"
+                     fontWeight="500"
                      interval={1}
-                     // direction="rtl"
-                     tickFormatter={(value) => value}
+                     direction="ltr"
+                     width={85}
+                     tickFormatter={(value) => value.toLocaleString()}
                   />
                   <Tooltip
                      contentStyle={{
@@ -150,13 +155,13 @@ const SalesChart = () => {
                      >
                         <stop
                            offset="0%"
-                           stopColor="rgb(79 0 255 / 90%)"
-                           stopOpacity={1}
+                           stopColor="rgb(49 0 255 / 90%)"
+                           stopOpacity={0.9}
                         />
                         <stop
                            offset="100%"
                            stopColor={colors.lastTotalPayments.fill}
-                           stopOpacity={0.1}
+                           stopOpacity={0.05}
                         />
                      </linearGradient>
                      <linearGradient

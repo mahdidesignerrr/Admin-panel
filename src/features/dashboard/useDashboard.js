@@ -11,10 +11,10 @@ export function useDashboard() {
     ? 1
     : Number(searchParams.get("last"));
 
-  const { isLoading, data } = useQuery({
+  const { isError, isLoading, data } = useQuery({
     queryKey: ["admin", `last-${numDays}`],
     queryFn: () => getDashboard(adminToken,numDays)
   });
 
-  return { isLoading, data };
+  return { isError, isLoading, data };
 }

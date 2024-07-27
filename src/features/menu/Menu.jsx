@@ -89,8 +89,8 @@ function MenuTitleSection() {
    const { category } = useContext(MenuContext);
    return (
       <StyledTitleSection>
-         <MenuTitleLine />
          <MenuTitle>{category}</MenuTitle>
+         <MenuTitleLine />
       </StyledTitleSection>
    );
 }

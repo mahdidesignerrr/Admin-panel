@@ -41,15 +41,15 @@ function DashboardLayout() {
    return (
       <DashboardContext>
          <StyledDashboardLayout>
-            <ReportsContainer>
-              <ReportsSection/>
-            </ReportsContainer>
             <LeftSection>
                <ChartContainer>
                   <DataChart/>
                </ChartContainer>
                <ActivityContainer>ACTIVITY</ActivityContainer>
             </LeftSection>
+            <ReportsContainer>
+              <ReportsSection/>
+            </ReportsContainer>
          </StyledDashboardLayout>
       </DashboardContext>
    );

@@ -47,7 +47,7 @@ const MenuContainer = styled.div`
 `;
 
 const AccountContainer = styled.div`
-   flex-grow: 2;
+   flex-grow: 1;
 `;
 
 function NavbarParent() {
@@ -81,9 +81,9 @@ function NavbarParent() {
 
    return (
       <StyledNavbar>
-         <AccountContainer>
-            <Account />
-         </AccountContainer>
+         <LogoContainer>
+            <Logo />
+         </LogoContainer>
          <MenuContainer>
             {menuItems.map((menu) => (
                <Navbar
@@ -94,9 +94,9 @@ function NavbarParent() {
                />
             ))}
          </MenuContainer>
-         <LogoContainer>
-            <Logo />
-         </LogoContainer>
+         <AccountContainer>
+            <Account />
+         </AccountContainer>
       </StyledNavbar>
    );
 }

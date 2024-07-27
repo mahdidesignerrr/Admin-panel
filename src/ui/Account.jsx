@@ -11,7 +11,7 @@ import { IconNotification, IconNotificationActive } from "../styles/Icons";
 
 const AccountContents = styled.div`
    display: flex;
-   justify-content: start;
+   justify-content: center;
    align-items: center;
    gap: 1.5rem;
    width: 100%;
@@ -106,10 +106,6 @@ function Account() {
 
    return (
       <AccountContents>
-         <Icon>
-            <IconNotification />
-            {/* {<IconNotificationActive />} */}
-         </Icon>
          <Motion.wrapper>
             <AccountImageWrapper onClick={handleClick}>
                {adminToken && isLoading ? (
@@ -122,6 +118,10 @@ function Account() {
                )}
             </AccountImageWrapper>
          </Motion.wrapper>
+         <Icon>
+            <IconNotification />
+            {/* {<IconNotificationActive />} */}
+         </Icon>
       </AccountContents>
    );
 }

@@ -25,6 +25,7 @@ const StyledNumber = styled.h2`
    font-family: poppins;
    font-weight: 600;
    display: flex;
+   direction: ltr;
    gap: 0.25rem;
    display: flex;
    align-items: baseline;

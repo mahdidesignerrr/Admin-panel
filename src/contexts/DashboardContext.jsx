@@ -5,10 +5,10 @@ const DashContext = createContext()
 
 export function DashboardContext({children}) {
 
-  const {isLoading, data} = useDashboard()
+  const {isError,isLoading, data} = useDashboard()
 
   return (
-    <DashContext.Provider value={{isLoading, data}}>
+    <DashContext.Provider value={{isError,isLoading, data}}>
       {children}
     </DashContext.Provider>
   )

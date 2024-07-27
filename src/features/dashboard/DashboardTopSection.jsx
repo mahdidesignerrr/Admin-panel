@@ -11,6 +11,7 @@ import DashboardFilter from "./DashboardFilter";
 const TopSection = styled.div`
    width: 100%;
    display: flex;
+   direction: ltr;
    justify-content: space-between;
    align-items: center;
    height: 18vh;
@@ -24,9 +25,11 @@ const types = {
    secondary: css`
       font-size: 2rem;
    `,
-    filter: css`
-    gap: 0.5rem;
- `,
+   filter: css`
+      gap: 0.5rem;
+direction: rtl;
+align-items: start;
+   `,
 };
 const DataSectionNumber = styled.div`
    display: flex;
@@ -39,7 +42,7 @@ const Label = styled.p`
    padding-right: 5px;
    font-size: ${(props) => props.fontSize || "1.7rem"};
    color: var(--color-grey-500);
-`;
+   `;
 
 const LabelSection = styled.div`
    display: flex;
@@ -47,7 +50,7 @@ const LabelSection = styled.div`
    align-items: end;
    flex-direction: column;
    ${(props) => types[props.type]}
-`;
+   `;
 
 LabelSection.defaultProps = {
    type: "secondary",
@@ -61,10 +64,8 @@ function DashboardTopSection({ stats }) {
    return (
       <TopSection>
          <LabelSection type="filter">
-            <Label fontSize="1.7rem">
-               آمار بر اساس:
-            </Label>
-         <DashboardFilter />
+            <Label fontSize="1.7rem">آمار بر اساس:</Label>
+            <DashboardFilter />
          </LabelSection>
          {stats.map(({ label, amount, type = "secondary", icon }) => (
             <DataSectionNumber key={label}>

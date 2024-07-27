@@ -5,9 +5,9 @@ function DashboardFilter() {
     <Filter
       filterField="last"
       options={[
-        { value: "3", label: "3 روز" },
-        { value: "7", label: "هفته" },
         { value: "30", label: "ماه" },
+        { value: "7", label: "هفته" },
+        { value: "3", label: "3 روز" },
       ]}
     />
   );
