@@ -1,13 +1,14 @@
 import styled from "styled-components";
-import { DashboardContext, useDataDashboard } from "../../contexts/DashboardContext";
 import ReportsSection from "./ReportsSection";
 import DataChart from "./dataChart";
+import DashboardBox from "../../ui/DashboardBox";
 
 const StyledDashboardLayout = styled.div`
    display: flex;
    justify-content: center;
    align-items: center;
-   height: 100vh;
+   height: 120vh;
+   gap: 1.5rem;
 `;
 
 const LeftSection = styled.div`
@@ -20,14 +21,14 @@ const LeftSection = styled.div`
    width: 65%;
 `;
 
-const ChartContainer = styled.div`
+const ChartContainer = styled(DashboardBox)`
    height: 50%;
    width: 100%;
 `;
 
 const ActivityContainer = styled.div`
    /* background: yellow; */
-   height: 50%;
+   height: 70%;
    width: 100%;
 `;
 
@@ -36,24 +37,28 @@ const ReportsContainer = styled.div`
    width: 35%;
 `;
 
-function DashboardLayout() {
+// const TopContainer = styled.div`
+//    display: flex;
+//    justify-content: space-between;
+//    align-items: center;
+// `;
+// const showMore = styled.div`
 
+// `;
+
+function DashboardLayout() {
    return (
-      <DashboardContext>
-         <StyledDashboardLayout>
-            <LeftSection>
-               <ChartContainer>
-                  <DataChart/>
-               </ChartContainer>
-               <ActivityContainer>
-                  
-               </ActivityContainer>
-            </LeftSection>
-            <ReportsContainer>
-              <ReportsSection/>
-            </ReportsContainer>
-         </StyledDashboardLayout>
-      </DashboardContext>
+      <StyledDashboardLayout>
+         <LeftSection>
+            <ChartContainer>
+               <DataChart />
+            </ChartContainer>
+            <ActivityContainer></ActivityContainer>
+         </LeftSection>
+         <ReportsContainer>
+            <ReportsSection />
+         </ReportsContainer>
+      </StyledDashboardLayout>
    );
 }
 

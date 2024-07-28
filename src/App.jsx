@@ -25,7 +25,6 @@ import Categories from "./pages/Categories";
 import Variants from "./pages/Variants";
 import WebsiteCustomization from "./pages/WebsiteCustomization";
 import TodoList from "./pages/TodoList";
-import Message from "./pages/message";
 import Club from "./pages/Club";
 import Reports from "./pages/Reports";
 import AuthLayout from "./pages/AuthLayout";

@@ -9,12 +9,12 @@ import {
 } from "recharts";
 
 import styled, { css } from "styled-components";
-import DashboardBox from "../../ui/DashboardBox";
 import { useDataDashboard } from "../../contexts/DashboardContext";
 import SpinnerMini from "../../ui/SpinnerMini";
 import NumberComponent from "../../utils/helpers";
+import { useSearchParams } from "react-router-dom";
 
-const StyledSalesChart = styled(DashboardBox)`
+const StyledSalesChart = styled.div`
    grid-column: 1 / -1;
    width: 100%;
    height: 100%;
@@ -24,19 +24,19 @@ const StyledSalesChart = styled(DashboardBox)`
    & .recharts-cartesian-grid-vertical line {
       stroke: var(--color-grey-300);
    }
-
 `;
 
 const colors = {
    lastTotalPayments: {
       stroke: "#2450ff",
       fill: "#0004dd",
+      mainFill: "rgb(49 0 255 / 90%)",
    },
-   totalPayments: { stroke: "#0084ff", fill: "#6db8ff" },
-   extrasSales: { stroke: "#22c55e", fill: "#22c55e" },
+   totalPayments: { stroke: "#0084ff", fill: "#6db8ff", mainFill: "#00a2ff" },
    text: "#e5e7eb",
    background: "#18212f",
 };
+
 const TooltipContainer = styled.div`
    display: flex;
    justify-content: center;
@@ -48,12 +48,13 @@ const TooltipContainer = styled.div`
 
 const types = {
    primary: css`
-      background-color: var(--color-brand-900);
-      box-shadow: var(--shadow-inset), var(--shadow-md);
+      background-color: var(--color-brand-800);
+      box-shadow: var(--shadow-inset), var(--shadow-sm);
    `,
    secondary: css`
       border: 1px dashed var(--color-grey-400);
       box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(50px);
    `,
 };
 
@@ -62,26 +63,29 @@ const TooltipItem = styled.div`
    height: 100%;
    padding: 0.3rem 1rem;
    border-radius: var(--border-radius-lg);
-   backdrop-filter: var(--filter-blur-lg);
    ${(props) => types[props.type]}
 `;
 
-TooltipItem.defaultProps = {
-   type: "secondary",
-};
-
 const SalesChart = () => {
-   const { isError, isLoading, data } = useDataDashboard();
+   const { isError, isLoading, data, reportsData } = useDataDashboard();
+   const [searchParams, setSearchParams] = useSearchParams();
+   const lastField = searchParams.get("report") || "lastTotalPaymentsDays";
 
+   const { color, title, lastChartField, chartField } = reportsData.find(
+      (data) => data.lastField === lastField
+   );
    return (
       <StyledSalesChart>
          {!isError && isLoading ? (
             <SpinnerMini />
+         ) : isError ? (
+            "Something wrong - error fetch"
          ) : (
-            isError ? "Something wrong - error fetch" :
             <ResponsiveContainer height={300} width="100%">
-               <AreaChart data={data.currentMetrics.resultsDays}>
-                  {/* <GradientDefs /> */}
+               <AreaChart
+                  key={lastChartField}
+                  data={data.currentMetrics.resultsDays}
+               >
                   <CartesianGrid
                      horizontal={false}
                      opacity={0.5}
@@ -96,7 +100,7 @@ const SalesChart = () => {
                      tickFormatter={(value) => value}
                   />
                   <YAxis
-                     dataKey="lastTotalPayment"
+                     dataKey={lastChartField}
                      tick={{ fill: colors.text, fontSize: 12 }}
                      tickLine={false}
                      axisLine={false}
@@ -105,7 +109,11 @@ const SalesChart = () => {
                      interval={1}
                      direction="ltr"
                      width={85}
-                     tickFormatter={(value) => value.toLocaleString()}
+                     tickFormatter={(value) =>
+                        typeof value === "string"
+                           ? value
+                           : value.toLocaleString()
+                     }
                   />
                   <Tooltip
                      contentStyle={{
@@ -123,14 +131,16 @@ const SalesChart = () => {
                            <TooltipContainer>
                               <TooltipItem type="primary">
                                  <NumberComponent
+                                    isAnimate={false}
                                     type="tooltip"
-                                    number={payload[0].payload.lastTotalPayment}
+                                    number={payload[0].payload[lastChartField]}
                                  />
                               </TooltipItem>
-                              <TooltipItem>
+                              <TooltipItem type="secondary">
                                  <NumberComponent
+                                    isAnimate={false}
                                     type="tooltip"
-                                    number={payload[0].payload.totalPayment}
+                                    number={payload[0].payload[chartField]}
                                  />
                               </TooltipItem>
                            </TooltipContainer>
@@ -138,60 +148,56 @@ const SalesChart = () => {
                      }}
                   />
                   <Area
-                     dataKey="lastTotalPayment"
+                     dataKey={lastChartField}
                      type="monotone"
-                     stroke={colors.lastTotalPayments.stroke}
-                     fill={`url(#cyan-gradient)`}
+                     stroke={color}
+                     fill={`url(#cyan-gradient-${lastField})`}
                      strokeWidth={2}
-                     name="میزان دریافتی"
+                     name={title}
                   />
                   <defs>
                      <linearGradient
-                        id="cyan-gradient"
+                        id={`cyan-gradient-${lastField}`}
                         x1="0"
                         y1="0"
                         x2="0"
                         y2="1"
                      >
-                        <stop
-                           offset="0%"
-                           stopColor="rgb(49 0 255 / 90%)"
-                           stopOpacity={0.9}
-                        />
+                        <stop offset="5%" stopColor={color} stopOpacity={0.9} />
                         <stop
                            offset="100%"
-                           stopColor={colors.lastTotalPayments.fill}
-                           stopOpacity={0.05}
+                           stopColor={color}
+                           stopOpacity={0.01}
                         />
                      </linearGradient>
                      <linearGradient
-                        id="second-gradient"
+                        id={`second-gradient-${lastField}`}
                         x1="0"
                         y1="0"
                         x2="0"
                         y2="1"
                      >
                         <stop
-                           offset="7%"
-                           stopColor="#00a2ff"
-                           stopOpacity={0.4}
+                           offset="100%"
+                           stopColor={color}
+                           stopOpacity={0.2}
                         />
                         <stop
                            offset="100%"
-                           stopColor={colors.totalPayments.fill}
-                           stopOpacity={0.05}
+                           stopColor={color}
+                           stopOpacity={0.1}
                         />
                      </linearGradient>
                   </defs>
                   <Area
-                     dataKey="totalPayment"
+                     dataKey={chartField}
                      type="monotone"
-                     stroke={colors.totalPayments.stroke}
-                     fill="url(#second-gradient)"
+                     stroke={color}
+                     fill={`url(#second-gradient-${lastField})`}
                      strokeDasharray="10"
                      strokeOpacity={0.7}
                      strokeWidth={2}
-                     name="میزان دریافتی"
+                     name={title}
                   />
                </AreaChart>
             </ResponsiveContainer>

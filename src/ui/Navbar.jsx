@@ -1,18 +1,17 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { motion } from "framer-motion";
-import Motion from "./Motion";
 
 // Animation settings
 const slideIn = {
-   initial: { scale: 0.9, opacity: 0 },
-   animate: { scale: 1, opacity: 1, ease: "circOut" },
-   exit: { scale: 0.9, opacity: 0 },
+   initial: { scale: 0.9, opacity: 0.1 },
+   animate: { scale: 1, opacity: 1 },
+   exit: { scale: 0.9, opacity: 0.1 },
 };
 
 const types = {
    primary: css`
-      border:var(--border-main-sm);
+      border: var(--border-main-sm);
       background-color: var(--backdrop-color);
       height: 9rem !important;
       box-shadow: var(--shadow-inset), var(--shadow-lg);
@@ -34,7 +33,6 @@ const types = {
    secondary: css`
       height: 4.8rem;
 
-      
       &:first-child {
          border-left: none;
       }
@@ -134,11 +132,11 @@ const MenuTitle = styled(motion.h3)`
    @keyframes showTitle {
       0% {
          opacity: 0;
-         scale: 0.8;
+         transform: scale(0.8);
       }
       100% {
          opacity: 1;
-         scale: 1;
+         transform: scale(1);
       }
    }
 `;
@@ -150,41 +148,39 @@ function Navbar({ icon, name, link, type = "secondary" }) {
    const isActive = pathname === `/${link}`;
 
    return (
-      <Motion>
-         <Menu
-            type={type}
-            onClick={() => navigate(`/${link}`, { replace: true })}
-            className={isActive ? "Alive" : ""}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            variants={slideIn}
+      <Menu
+         type={type}
+         onClick={() => navigate(`/${link}`, { replace: true })}
+         className={isActive ? "Alive" : ""}
+         initial="initial"
+         animate="animate"
+         exit="exit"
+         variants={slideIn}
+         transition={{ duration: 0.3 }}
+      >
+         <MenuContent
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
          >
-            <MenuContent
+            <MenuActive
+               initial={{ scale: 0 }}
+               animate={isActive ? { scale: 1 } : { scale: 0 }}
+               exit={{ scale: 0 }}
+               transition={{ duration: 0.3 }}
+            />
+            <MenuTitle
                initial={{ opacity: 0 }}
                animate={{ opacity: 1 }}
                exit={{ opacity: 0 }}
                transition={{ duration: 0.3 }}
             >
-               <MenuActive
-                  initial={{ scale: 0 }}
-                  animate={isActive ? { scale: 1 } : { scale: 0 }}
-                  exit={{ scale: 0 }}
-                  transition={{ duration: 0.3 }}
-               />
-               <MenuTitle
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-               >
-                  {name}
-               </MenuTitle>
-               {icon && icon}
-            </MenuContent>
-         </Menu>
-      </Motion>
+               {name}
+            </MenuTitle>
+            {icon && icon}
+         </MenuContent>
+      </Menu>
    );
 }
 

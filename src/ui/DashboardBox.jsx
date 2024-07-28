@@ -24,8 +24,8 @@ const DashboardBox = styled.div`
       height: 30%;
       content: "";
       position: absolute;
-      filter: blur(110px);
-      background-color: var(--color-brand-600);
+      filter: blur(100px);
+      background-color:rgb(80 00 255 / 100%);
       z-index: -1;
       left: 10%;
       top: 50%;

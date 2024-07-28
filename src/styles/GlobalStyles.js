@@ -107,6 +107,9 @@ const GlobalStyles = createGlobalStyle`
 --shadow-inset-bot: inset 0px -2px 8px 0px rgb(79 40 255 / 80%);
 --shadow-inset-full:inset 0px 0px 25px 25px rgb(79 40 255 / 80%);
 
+--shadow-inset-nc: inset 0px 3px 8px 0px;
+--shadow-inset-bot-nc: inset 0px -2px 8px 0px;
+
     --image-grayscale: 0;
   --image-opacity: 100%;
   }
@@ -137,8 +140,8 @@ const GlobalStyles = createGlobalStyle`
     --border-radius-md: 7px;
     --border-radius-lg: 3.2rem;
   
-    --shadow-main: 0 0 10px #050505b4
-    --morabba-500: "Morabba"
+    --shadow-main: 0 0 10px #050505b4;
+    --morabba-500: "Morabba";
   }
 }
 

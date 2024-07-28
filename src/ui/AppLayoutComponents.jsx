@@ -59,5 +59,5 @@ export const Container = styled.div`
    display: flex;
    direction: rtl;
    flex-direction: column;
-   gap: 2.5rem;
+   gap: 2rem;
 `;
