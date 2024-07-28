@@ -8,7 +8,7 @@ export function useDashboard() {
   const { adminToken } = useAdminToken();
 
   const numDays = !searchParams.get("last")
-    ? 3
+    ? 7
     : Number(searchParams.get("last"));
 
   const { isError, isLoading, data } = useQuery({

@@ -6,6 +6,7 @@ import { useSearchParams } from "react-router-dom";
 import { useDataDashboard } from "../../contexts/DashboardContext";
 import SpinnerMini from "../../ui/SpinnerMini";
 import { IconGrowOrDown } from "../../styles/Icons";
+import Skeleton from "react-loading-skeleton";
 
 const TopSection = styled.div`
    width: 100%;
@@ -62,6 +63,8 @@ const IconSection = styled.div`
 function DashboardTopSection() {
    const [searchParams, setSearchParams] = useSearchParams();
    const lastField = searchParams.get("report") || "lastTotalPaymentsDays";
+   const numTime = searchParams.get("last") || "7"
+   const time = numTime == 7 ? "هفته" : numTime == 3 ? "3 روز" : "ماه"
    const { isError, isLoading, data, reportsData } = useDataDashboard();
    const { icon, title, field } = reportsData.find(
       (data) => data.lastField === lastField
@@ -74,7 +77,7 @@ function DashboardTopSection() {
    const stats = [
       { label: "میزان تغییر", amount: percentChange, icon: <IconGrowOrDown /> },
       {
-         label: `${title} در هفته گذشته`,
+         label: `${title} در ${time} گذشته`,
          amount: data?.currentMetrics[field],
          icon,
       },
@@ -86,25 +89,24 @@ function DashboardTopSection() {
       },
    ];
 
-   if (isLoading) return <SpinnerMini />;
    if (isError) return "we have error";
 
    return (
       <TopSection>
          <LabelSection type="filter">
-            <Label fontSize="1.7rem">آمار بر اساس:</Label>
-            <DashboardFilter />
+            <Label fontSize="1.7rem">{isLoading ? <Skeleton width={90} height={20}/> : "زمان آمار"}</Label>
+            {isLoading ? <Skeleton width={220} borderRadius={50} height={50}/> : <DashboardFilter />}
          </LabelSection>
          {stats.map(({ label, amount, type = "secondary", icon }, i) => (
             <DataSectionNumber key={`${label}-${i}`}>
                <LabelSection type={type}>
                   <Label fontSize={type === "primary" ? "2rem" : "1.7rem"}>
-                     {label}
+                     {isLoading ? <Skeleton width={90} height={20}/> : label}
                   </Label>
-                  <NumberComponent key={`${label}-${amount}-${i}`} type={type} number={amount} />
+                  {isLoading ? <Skeleton borderRadius={20} width={type === "primary" ? 250 : 100} height={type === "primary" ? 40 : 30}/> : <NumberComponent key={`${label}-${amount}-${i}`} type={type} number={amount} />}
                </LabelSection>
                <IconSection>
-                  <Icon>{icon}</Icon>
+                  <Icon>{isLoading ? <Skeleton width={50} height={50} circle/> : icon}</Icon>
                </IconSection>
             </DataSectionNumber>
          ))}

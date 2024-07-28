@@ -1,9 +1,10 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Icon from "./Icon";
 import NumberComponent, { percentage } from "../utils/helpers";
 import StateChart from "../features/dashboard/StateChart";
 import { useDataDashboard } from "../contexts/DashboardContext";
 import { useSearchParams } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
 
 const StyledStat = styled.div`
    display: flex;
@@ -21,11 +22,28 @@ const StyledStat = styled.div`
    transition: all 0.25s ease-in-out;
    position: relative;
    overflow: hidden;
-   &:hover {
-      box-shadow: inset 0px -2px 6px 0px ${(props) => props.color || "rgb(79 00 255 / 100%)"},
-         var(--shadow-sm) !important;
-      transform: scale(0.98); /* استفاده از transform به جای scale */
-   }
+
+   ${(props) =>
+      !props.$isActive
+         ? css`
+              &:hover {
+                 box-shadow: inset 0px -2px 6px 0px ${(props) => props.color || "rgb(79 00 255 / 100%)"},
+                    var(--shadow-sm) !important;
+                 transform: scale(0.98);
+              }
+           `
+         : ""}
+
+   ${(props) =>
+      props.$isActive
+         ? css`
+              cursor: pointer;
+              box-shadow: inset 0px -2px 6px 0px ${(props) => props.color || "rgb(79 00 255 / 100%)"},
+                 var(--shadow-sm) !important;
+              transform: scale(0.95);
+           `
+         : ""}
+
    &::before {
       width: 100%;
       height: 100%;
@@ -49,6 +67,17 @@ const LabelSection = styled.div`
    justify-content: center;
    align-items: center;
    gap: 1rem;
+   & div {
+      box-shadow: var(--shadow-md) !important;
+   }
+   ${(props) =>
+      props.$isActive
+         ? css`
+              & div {
+                 box-shadow: var(--shadow-sm) !important;
+              }
+           `
+         : ""}
    & h2 {
       font-size: 2.5rem;
       word-break: break-all;
@@ -71,25 +100,30 @@ const PercentBox = styled.div`
    font-weight: 600;
    direction: ltr;
    width: 35%;
-   background-color: ${(props) => (props.$isGrow ? "#00ff33" : "#ff5151")}; /* استفاده از $isGrow */
+   background-color: ${(props) =>
+      props.$isGrow ? "#00ff33" : "#ff5151"}; /* استفاده از $isGrow */
+   color: ${(props) =>
+      props.$isGrow ? "var(--color-grey-0)" : "var(--color-grey-900)"};
    display: flex;
    font-size: 1.5rem;
    justify-content: center;
    align-items: center;
-   color: var(--color-grey-100);
    border-radius: var(--border-radius-lg);
    box-shadow: var(--shadow-sm);
 `;
 
 function Stats({ color, title, field, lastField, icon, chartField }) {
-   const { data } = useDataDashboard();
+   const { isLoading, data } = useDataDashboard();
    const [searchParams, setSearchParams] = useSearchParams();
 
    const amount = data?.currentMetrics?.[field];
    const lastAmount = data?.currentMetrics?.[lastField];
 
-   const currentFilter = searchParams.get("report") || data?.currentMetrics?.["lastTotalPaymentsDays"];
+   const currentFilter =
+      searchParams.get("report") ||
+      data?.currentMetrics?.["lastTotalPaymentsDays"];
 
+   const isActive = currentFilter === lastField;
    function handleClick() {
       searchParams.set("report", lastField);
       setSearchParams(searchParams);
@@ -97,20 +131,35 @@ function Stats({ color, title, field, lastField, icon, chartField }) {
 
    const percentChange = percentage(amount, lastAmount);
    const isGrow = !percentChange.includes("-");
-   
+
    return (
-      <StyledStat value={lastField} color={color} onClick={handleClick}>
-         <RightSection>
-            <LabelSection>
-               <Icon>
-                  {icon}
-               </Icon>
-               <h2>{title}</h2>
-            </LabelSection>
-            <NumberComponent key={lastField} type="filter" number={lastAmount} />
-            <PercentBox $isGrow={isGrow}>{percentChange}</PercentBox> {/* استفاده از $isGrow */}
-         </RightSection>
-         <StateChart field={chartField} color={color} />
+      <StyledStat
+         $isActive={isActive}
+         value={lastField}
+         color={color}
+         onClick={handleClick}
+      >
+               {isLoading ? (
+                  <Skeleton height={1000} width={1000} />
+               ) : (
+                  <>
+                     <RightSection>
+                        <LabelSection $isActive={isActive}>
+                           <Icon>{icon}</Icon>
+                           <h2>{title}</h2>
+                        </LabelSection>
+                        <NumberComponent
+                           key={lastField}
+                           type="filter"
+                           number={lastAmount}
+                        />
+                        <PercentBox $isGrow={isGrow}>
+                           {percentChange}
+                        </PercentBox>
+                     </RightSection>
+                     <StateChart field={chartField} color={color} />
+                  </>
+               )}
       </StyledStat>
    );
 }

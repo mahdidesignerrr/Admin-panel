@@ -20,7 +20,7 @@ import Message from './pages/Message'
 import DiscountedCode from "./pages/DiscountedCode";
 import Users from "./pages/Users";
 import Transports from "./pages/Transports";
-import Warranty from "./pages/warranty";
+import Warranty from "./pages/Warranty";
 import Brands from "./pages/Brands";
 import Categories from "./pages/Categories";
 import Variants from "./pages/Variants";

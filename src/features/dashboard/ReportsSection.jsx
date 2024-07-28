@@ -21,10 +21,10 @@ const StyledStats = styled(DashboardBox)`
 `;
 
 function ReportsSection() {
-   const { isLoading, reportsData } = useDataDashboard();
+   const { reportsData } = useDataDashboard();
    return (
       <StyledStats>
-         {!isLoading && reportsData.map(({title, field, lastField,icon,color, lastChartField}, i) => (
+         {reportsData.map(({title, field, lastField,icon,color, lastChartField}, i) => (
          <Stats key={`${field}-${i}`} title={title} field={field} lastField={lastField} chartField={lastChartField} icon={icon} color={color}/>
          ))}
       </StyledStats>

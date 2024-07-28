@@ -10,11 +10,11 @@ import {
 
 import styled, { css } from "styled-components";
 import { useDataDashboard } from "../../contexts/DashboardContext";
-import SpinnerMini from "../../ui/SpinnerMini";
 import NumberComponent from "../../utils/helpers";
 import { useSearchParams } from "react-router-dom";
+import DashboardBox from "../../ui/DashboardBox";
 
-const StyledSalesChart = styled.div`
+const StyledSalesChart = styled(DashboardBox)`
    grid-column: 1 / -1;
    width: 100%;
    height: 100%;
@@ -76,9 +76,7 @@ const SalesChart = () => {
    );
    return (
       <StyledSalesChart>
-         {!isError && isLoading ? (
-            <SpinnerMini />
-         ) : isError ? (
+         {isError ? (
             "Something wrong - error fetch"
          ) : (
             <ResponsiveContainer height={300} width="100%">

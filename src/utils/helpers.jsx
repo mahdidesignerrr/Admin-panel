@@ -86,14 +86,13 @@ const formatNumber = (number, isAnimate) => {
    }
 
    return (
-      <AnimatePresence>
+      <>
          {firstPart && (
             <motion.span
                className="first-part"
                key={`first-part-${firstPart}`}
                initial={isAnimate ? { opacity: 0, y: 30 } : {}}
                animate={isAnimate ? { opacity: 1, y: 0, transition: { ease: "easeOut", duration: 0.4 } } : {}}
-               exit={isAnimate ? { opacity: 0.7, y: 30, transition: { duration: 0.3, ease: "easeIn" } } : {}}
             >
                {numStr.includes("%") || numStr.includes(".") ? numStr : `${firstPart},`}
             </motion.span>
@@ -104,7 +103,6 @@ const formatNumber = (number, isAnimate) => {
                key={`middle-three-${middleThree}`}
                initial={isAnimate ? { opacity: 0, y: 20 } : {}}
                animate={isAnimate ? { opacity: 1, y: 0, transition: { ease: "easeOut", duration: 0.4, delay: 0.15 } } : {}}
-               exit={isAnimate ? { opacity: 0.7, y: 20, transition: { duration: 0.3, ease: "easeIn", delay: 0.15 } } : {}}
             >
                {middleThree}
             </motion.span>
@@ -115,12 +113,11 @@ const formatNumber = (number, isAnimate) => {
                key={`last-three-${lastThree}`}
                initial={isAnimate ? { opacity: 0, y: 10 } : {}}
                animate={isAnimate ? { opacity: 1, y: 0, transition: { ease: "easeOut", duration: 0.4, delay: 0.3 } } : {}}
-               exit={isAnimate ? { opacity: 0.95, y: 10, transition: { duration: 0.3, ease: "easeIn", delay: 0.3 } } : {}}
             >
                ,{lastThree}
             </motion.span>
          )}
-      </AnimatePresence>
+      </>
    );
 };
 

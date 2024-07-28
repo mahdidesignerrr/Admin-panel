@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import ReportsSection from "./ReportsSection";
 import DataChart from "./DataChart";
-import DashboardBox from "../../ui/DashboardBox";
+import { useDataDashboard } from "../../contexts/DashboardContext";
+import Skeleton from "react-loading-skeleton";
 
 const StyledDashboardLayout = styled.div`
    display: flex;
@@ -21,7 +22,7 @@ const LeftSection = styled.div`
    width: 65%;
 `;
 
-const ChartContainer = styled(DashboardBox)`
+const ChartContainer = styled.div`
    height: 50%;
    width: 100%;
 `;
@@ -47,11 +48,16 @@ const ReportsContainer = styled.div`
 // `;
 
 function DashboardLayout() {
+   const { isLoading } = useDataDashboard();
    return (
       <StyledDashboardLayout>
          <LeftSection>
             <ChartContainer>
-               <DataChart />
+               {isLoading ? (
+                  <Skeleton height="100%" borderRadius={50} />
+               ) : (
+                     <DataChart />
+               )}
             </ChartContainer>
             <ActivityContainer></ActivityContainer>
          </LeftSection>
