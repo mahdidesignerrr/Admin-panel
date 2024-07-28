@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import ReportsSection from "./ReportsSection";
-import DataChart from "./dataChart";
+import DataChart from "./DataChart";
 import DashboardBox from "../../ui/DashboardBox";
 
 const StyledDashboardLayout = styled.div`
