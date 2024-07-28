@@ -16,6 +16,7 @@ import AppLayout from "./ui/AppLayout";
 import AuthProvider from "./contexts/AuthProvider";
 import Menu from "./pages/Menu";
 import Messages from "./pages/Messages";
+import Message from './pages/Message'
 import DiscountedCode from "./pages/DiscountedCode";
 import Users from "./pages/Users";
 import Transports from "./pages/Transports";
