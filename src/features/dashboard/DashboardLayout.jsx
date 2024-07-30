@@ -3,11 +3,8 @@ import ReportsSection from "./ReportsSection";
 import DataChart from "./DataChart";
 import {
    DashboardContext,
-   useDataDashboard,
 } from "../../contexts/DashboardContext";
-import Skeleton from "react-loading-skeleton";
 import ActivitySection from "./ActivitySection";
-import NotInternet from "../../pages/NotInternet";
 
 const StyledDashboardLayout = styled.div`
    display: flex;

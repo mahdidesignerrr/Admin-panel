@@ -3,6 +3,7 @@ import { useDataDashboard } from "../../contexts/DashboardContext";
 import DashboardBox from "../../ui/DashboardBox";
 import Stats from "../../ui/Stat";
 import { memo } from "react";
+import Skeleton from "react-loading-skeleton";
 
 
 const StyledStats = styled(DashboardBox)`
@@ -23,7 +24,8 @@ const StyledStats = styled(DashboardBox)`
 `;
 
 const ReportsSection = memo(function ReportsSection() {
-   const { reportsData } = useDataDashboard();
+   const {isLoading, reportsData } = useDataDashboard();
+   if (isLoading) return  <Skeleton width="100%" height="100%"borderRadius={50} />
    return (
       <StyledStats>
          {reportsData.map(({title, field, lastField,icon,color, lastChartField}, i) => (

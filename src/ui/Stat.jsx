@@ -93,7 +93,7 @@ const RightSection = styled.div`
    gap: 0.5rem;
    height: 100%;
    width: 100%;
-   cursor: ${props => props.$isActive ? "auto" : "pointer"};
+   cursor: ${(props) => (props.$isActive ? "auto" : "pointer")};
 `;
 
 const PercentBox = styled.div`
@@ -113,7 +113,14 @@ const PercentBox = styled.div`
    box-shadow: var(--shadow-sm);
 `;
 
-const Stats = memo(function Stats({ color, title, field, lastField, icon, chartField }) {
+const Stats = memo(function Stats({
+   color,
+   title,
+   field,
+   lastField,
+   icon,
+   chartField,
+}) {
    const { isLoading, data } = useDataDashboard();
    const [searchParams, setSearchParams] = useSearchParams();
 
@@ -126,7 +133,7 @@ const Stats = memo(function Stats({ color, title, field, lastField, icon, chartF
 
    const isActive = currentFilter === lastField;
    function handleClick() {
-      if(isActive) return null
+      if (isActive) return null;
       searchParams.set("report", lastField);
       setSearchParams(searchParams);
    }
@@ -141,29 +148,21 @@ const Stats = memo(function Stats({ color, title, field, lastField, icon, chartF
          color={color}
          onClick={handleClick}
       >
-               {isLoading ? (
-                  <Skeleton height={1000} width={1000} />
-               ) : (
-                  <>
-                     <RightSection $isActive={isActive}>
-                        <LabelSection $isActive={isActive}>
-                           <Icon>{icon}</Icon>
-                           <h2>{title}</h2>
-                        </LabelSection>
-                        <NumberComponent
-                           key={lastField}
-                           type="filter"
-                           number={lastAmount}
-                        />
-                        <PercentBox $isGrow={isGrow}>
-                           {percentChange}
-                        </PercentBox>
-                     </RightSection>
-                     <StateChart field={chartField} color={color} />
-                  </>
-               )}
+         <RightSection $isActive={isActive}>
+            <LabelSection $isActive={isActive}>
+               <Icon>{icon}</Icon>
+               <h2>{title}</h2>
+            </LabelSection>
+            <NumberComponent
+               key={lastField}
+               type="filter"
+               number={lastAmount}
+            />
+            <PercentBox $isGrow={isGrow}>{percentChange}</PercentBox>
+         </RightSection>
+         <StateChart field={chartField} color={color} />
       </StyledStat>
    );
-})
+});
 
 export default Stats;
