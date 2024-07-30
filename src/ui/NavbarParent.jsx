@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import Logo from "./Logo";
 import Account from "./Account";
 import { IconComment, IconDashboard, IconOrders, IconProduct } from "../styles/Icons";
+import { memo, useMemo } from "react";
 
 const StyledNavbar = styled.div`
    padding: 2.5rem 3rem;
@@ -50,35 +51,15 @@ const AccountContainer = styled.div`
    flex-grow: 1;
 `;
 
-function NavbarParent() {
-   const menuItems = [
-      {
-         name: "داشبورد",
-         link: "dashboard",
-         icon: <IconDashboard />,
-      },
-      {
-         name: "محصولات",
-         link: "products",
-         icon: <IconProduct />,
-      },
-      {
-         name: "سفارشات",
-         link: "orders",
-         icon: <IconOrders />,
-      },
-      {
-         name: "کامنت ها",
-         link: "Comments",
-         icon: <IconComment/>,
-      },
-      {
-         name: "منو",
-         link: "menu",
-         icon: <IconComment/>,
-      },
-   ];
-
+const NavbarParent = memo(function NavbarParent() {
+   const menuItems = useMemo(() => [
+      { name: "داشبورد", link: "dashboard", icon: <IconDashboard /> },
+      { name: "محصولات", link: "products", icon: <IconProduct /> },
+      { name: "سفارشات", link: "orders", icon: <IconOrders /> },
+      { name: "کامنت ها", link: "Comments", icon: <IconComment /> },
+      { name: "منو", link: "menu", icon: <IconComment /> },
+   ], []);
+ 
    return (
       <StyledNavbar>
          <AccountContainer>
@@ -99,6 +80,7 @@ function NavbarParent() {
          </LogoContainer>
       </StyledNavbar>
    );
-}
+ });
+ 
 
 export default NavbarParent;

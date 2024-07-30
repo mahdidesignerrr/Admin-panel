@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { motion } from "framer-motion";
+import { memo } from "react";
 
 // Animation settings
 const slideIn = {
@@ -141,7 +142,7 @@ const MenuTitle = styled(motion.h3)`
    }
 `;
 
-function Navbar({ icon, name, link, type = "secondary" }) {
+const Navbar = memo(function Navbar({ icon, name, link, type = "secondary" }) {
    const navigate = useNavigate();
    const { pathname } = useLocation();
 
@@ -182,6 +183,6 @@ function Navbar({ icon, name, link, type = "secondary" }) {
          </MenuContent>
       </Menu>
    );
-}
+})
 
 export default Navbar;

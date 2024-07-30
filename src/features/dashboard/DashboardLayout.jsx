@@ -1,8 +1,13 @@
 import styled from "styled-components";
 import ReportsSection from "./ReportsSection";
 import DataChart from "./DataChart";
-import { useDataDashboard } from "../../contexts/DashboardContext";
+import {
+   DashboardContext,
+   useDataDashboard,
+} from "../../contexts/DashboardContext";
 import Skeleton from "react-loading-skeleton";
+import ActivitySection from "./ActivitySection";
+import NotInternet from "../../pages/NotInternet";
 
 const StyledDashboardLayout = styled.div`
    display: flex;
@@ -12,24 +17,24 @@ const StyledDashboardLayout = styled.div`
    gap: 1.5rem;
 `;
 
-const LeftSection = styled.div`
+const RightSection = styled.div`
    display: flex;
    justify-content: center;
    align-items: center;
    flex-direction: column;
-   gap: 2rem;
+   gap: 1.5rem;
    height: 100%;
    width: 65%;
 `;
 
 const ChartContainer = styled.div`
-   height: 50%;
+   height: 40%;
    width: 100%;
 `;
 
 const ActivityContainer = styled.div`
    /* background: yellow; */
-   height: 70%;
+   height: 80%;
    width: 100%;
 `;
 
@@ -48,22 +53,21 @@ const ReportsContainer = styled.div`
 // `;
 
 function DashboardLayout() {
-   const { isLoading } = useDataDashboard();
    return (
       <StyledDashboardLayout>
-         <LeftSection>
-            <ChartContainer>
-               {isLoading ? (
-                  <Skeleton height="100%" borderRadius={50} />
-               ) : (
-                     <DataChart />
-               )}
-            </ChartContainer>
-            <ActivityContainer></ActivityContainer>
-         </LeftSection>
-         <ReportsContainer>
-            <ReportsSection />
-         </ReportsContainer>
+         <DashboardContext>
+            <RightSection>
+               <ChartContainer>
+                  <DataChart />
+               </ChartContainer>
+               <ActivityContainer>
+                  <ActivitySection />
+               </ActivityContainer>
+            </RightSection>
+            <ReportsContainer>
+               <ReportsSection />
+            </ReportsContainer>
+         </DashboardContext>
       </StyledDashboardLayout>
    );
 }

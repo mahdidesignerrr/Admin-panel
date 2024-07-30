@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { IconLoginSecurity } from "../styles/Icons";
 
-export default function useAdminToken() {
+export  function useAdminToken() {
   const navigate = useNavigate()
 
   const [adminToken, setAdminToken] = useState(

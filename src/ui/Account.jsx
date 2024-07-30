@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Icon from "./Icon";
-import useAdminToken from "../hooks/getAdminToken";
+import {useAdminToken} from "../hooks/getAdminToken";
 import { useAdmin } from "../features/authentication/useAdmin";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -8,6 +8,7 @@ import { apiUrl } from "../services/apiConfigs";
 import Motion from "./Motion";
 import { useNavigate } from "react-router-dom";
 import { IconNotification, IconNotificationActive } from "../styles/Icons";
+import { memo } from "react";
 
 const AccountContents = styled.div`
    display: flex;
@@ -91,7 +92,7 @@ const LiveActive = styled.div`
    }
 `;
 
-function Account() {
+const Account = memo(function Account() {
    const { adminToken } = useAdminToken();
    const { admin, isLoading } = useAdmin(adminToken);
    const navigate = useNavigate();
@@ -124,6 +125,6 @@ function Account() {
          </Icon>
       </AccountContents>
    );
-}
+})
 
 export default Account;

@@ -1,27 +1,27 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
+
 @font-face {
-  font-family: Morabba;
+  font-family: "Morabba";
   font-weight: 500;
-  src: url("./fonts/Morabba/Morabba-Medium.ttf");
+  src: url("../../public/Morabba/Morabba-Medium.ttf");
   font-display: fallback
 }
 
 @font-face {
-  font-family: Morabba;
+  font-family: "Morabba";
   font-weight: 600;
-  src: url("./fonts/Morabba/Morabba-SemiBold.ttf");
+  src: url("./../public/Morabba/Morabba-SemiBold.ttf");
   font-display: fallback
 }
 
 @font-face {
-  font-family: Morabba;
+  font-family: "Morabba";
   font-weight: 700;
-  src: url("./fonts/Morabba/Morabba-Bold.ttf");
+  src: url("./../public/Morabba/Morabba-Bold.ttf");
   font-display: fallback
 }
-
 :root {
   
   &, &.dark-mode {
@@ -40,7 +40,7 @@ const GlobalStyles = createGlobalStyle`
 --color-blue-100: #075985;
 --color-blue-700: #e0f2fe;
 --color-green-100: #166534;
---color-green-700: #dcfce7;
+--color-green-500: #00ff00;
 --color-yellow-100: #854d0e;
 --color-yellow-700: #fef9c3;
 --color-silver-100: #374151;
@@ -57,7 +57,7 @@ const GlobalStyles = createGlobalStyle`
 --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
 --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.3);
 --shadow-lg: 0 2rem 2.8rem rgba(0, 0, 0, 0.4);
---shadow-inset: inset 0px 2px 5px 0px rgb(79 30 255 / 80%);
+--shadow-inset: inset 0px 2px 5px 0px rgb(79 40 255 / 80%);
 --shadow-outset: 0px 1px 8px 0px rgb(79 40 255 / 80);
 --shadow-inset-bot: inset 0px -2px 8px 0px rgb(79 40 255 / 80%);
 --shadow-inset-full:inset 0px 0px 25px 25px rgb(79 40 255 / 80%);
@@ -84,7 +84,7 @@ const GlobalStyles = createGlobalStyle`
   --color-blue-100: #e0f2fe;
   --color-blue-700: #0369a1;
   --color-green-100: #dcfce7;
-  --color-green-700: #15803d;
+  --color-green-500: #00ff00;
   --color-yellow-100: #fef9c3;
   --color-yellow-700: #a16207;
   --color-silver-100: #e5e7eb;
@@ -125,7 +125,7 @@ const GlobalStyles = createGlobalStyle`
     --color-brand-500: #6366f1;
     --color-brand-600: #4f46e5;
     --color-brand-700: #4338ca;
-    --color-brand-800: #3730a3;
+    --color-brand-800: #42139a; // 3730a3
     --color-brand-900: #312e81;
     --filter-blur-md: blur(15px);
     --filter-blur-lg: blur(50px);
@@ -137,11 +137,11 @@ const GlobalStyles = createGlobalStyle`
   
     --border-radius-tiny: 3px;
     --border-radius-sm: 5px;
-    --border-radius-md: 7px;
+    --border-radius-md: 15px;
     --border-radius-lg: 3.2rem;
   
     --shadow-main: 0 0 10px #050505b4;
-    --morabba-500: "Morabba";
+    --morabba: "Morabba";
   }
 }
 

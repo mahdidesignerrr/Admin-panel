@@ -1,12 +1,13 @@
 import styled, { css } from "styled-components";
-import Icon from "../../ui/Icon";
-import NumberComponent, { percentage } from "../../utils/helpers";
+import { percentage } from "../../utils/helpers";
 import DashboardFilter from "./DashboardFilter";
 import { useSearchParams } from "react-router-dom";
 import { useDataDashboard } from "../../contexts/DashboardContext";
 import SpinnerMini from "../../ui/SpinnerMini";
 import { IconGrowOrDown } from "../../styles/Icons";
 import Skeleton from "react-loading-skeleton";
+import StatHeading from "../../ui/StatHeading";
+import { memo, useMemo } from "react";
 
 const TopSection = styled.div`
    width: 100%;
@@ -31,12 +32,6 @@ const types = {
       align-items: start;
    `,
 };
-const DataSectionNumber = styled.div`
-   display: flex;
-   justify-content: center;
-   gap: 1.5rem;
-   align-items: center;
-`;
 
 const Label = styled.p`
    padding-right: 5px;
@@ -56,16 +51,12 @@ LabelSection.defaultProps = {
    type: "secondary",
 };
 
-const IconSection = styled.div`
-   padding-top: 20px;
-`;
-
-function DashboardTopSection() {
+const DashboardTopSection = memo(function DashboardTopSection() {
    const [searchParams, setSearchParams] = useSearchParams();
    const lastField = searchParams.get("report") || "lastTotalPaymentsDays";
-   const numTime = searchParams.get("last") || "7"
-   const time = numTime == 7 ? "هفته" : numTime == 3 ? "3 روز" : "ماه"
-   const { isError, isLoading, data, reportsData } = useDataDashboard();
+   const numTime = searchParams.get("last") || "7";
+   const time = numTime == 7 ? "هفته" : numTime == 3 ? "3 روز" : "ماه";
+   const { isLoading, data, reportsData } = useDataDashboard();
    const { icon, title, field } = reportsData.find(
       (data) => data.lastField === lastField
    );
@@ -75,7 +66,11 @@ function DashboardTopSection() {
       data?.currentMetrics[lastField]
    );
    const stats = [
-      { label: "میزان تغییر", amount: percentChange, icon: <IconGrowOrDown /> },
+      {
+         label: "میزان تغییر",
+         amount: percentChange,
+         icon: <IconGrowOrDown />,
+      },
       {
          label: `${title} در ${time} گذشته`,
          amount: data?.currentMetrics[field],
@@ -89,29 +84,31 @@ function DashboardTopSection() {
       },
    ];
 
-   if (isError) return "we have error";
-
    return (
       <TopSection>
          <LabelSection type="filter">
-            <Label fontSize="1.7rem">{isLoading ? <Skeleton width={90} height={20}/> : "زمان آمار"}</Label>
-            {isLoading ? <Skeleton width={220} borderRadius={50} height={50}/> : <DashboardFilter />}
+            <Label fontSize="1.7rem">
+               {isLoading ? <Skeleton width={90} height={20} /> : "زمان آمار"}
+            </Label>
+            {isLoading ? (
+               <Skeleton width={220} borderRadius={50} height={50} />
+            ) : (
+               <DashboardFilter />
+            )}
          </LabelSection>
          {stats.map(({ label, amount, type = "secondary", icon }, i) => (
-            <DataSectionNumber key={`${label}-${i}`}>
-               <LabelSection type={type}>
-                  <Label fontSize={type === "primary" ? "2rem" : "1.7rem"}>
-                     {isLoading ? <Skeleton width={90} height={20}/> : label}
-                  </Label>
-                  {isLoading ? <Skeleton borderRadius={20} width={type === "primary" ? 250 : 100} height={type === "primary" ? 40 : 30}/> : <NumberComponent key={`${label}-${amount}-${i}`} type={type} number={amount} />}
-               </LabelSection>
-               <IconSection>
-                  <Icon>{isLoading ? <Skeleton width={50} height={50} circle/> : icon}</Icon>
-               </IconSection>
-            </DataSectionNumber>
+            <StatHeading
+               key={label}
+               isLoading={isLoading}
+               label={label}
+               type={type}
+               amount={amount}
+               icon={icon}
+            />
          ))}
       </TopSection>
    );
-}
+})
+
 
 export default DashboardTopSection;

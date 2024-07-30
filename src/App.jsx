@@ -32,6 +32,7 @@ import AuthLayout from "./pages/AuthLayout";
 import LoginForm from "./features/authentication/LoginForm";
 import ConfirmLoginForm from "./features/authentication/ConfirmLoginForm";
 import { SkeletonTheme } from "react-loading-skeleton";
+import NotInternet from "./pages/NotInternet";
 function App() {
    const queryClient = new QueryClient({
       defaultOptions: {
@@ -52,6 +53,7 @@ function App() {
                   baseColor="#313131"
                   highlightColor="#4b4b4b"
                   direction="rtl"
+                  borderRadius={20}
                >
                   <BrowserRouter>
                      <Routes>
@@ -96,6 +98,7 @@ function App() {
                               element={<WebsiteCustomization />}
                            />
                            <Route path="todoList" element={<TodoList />} />
+                           <Route path="notInternet" element={<NotInternet/>}/>
                         </Route>
                         <Route path="login" element={<AuthLayout />}>
                            <Route index element={<LoginForm />} />

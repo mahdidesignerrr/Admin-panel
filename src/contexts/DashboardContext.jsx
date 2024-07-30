@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useMemo } from "react";
 import { useDashboard } from "../features/dashboard/useDashboard";
 import {
    IconMoney,
@@ -18,7 +18,7 @@ const reportsData = [
       lastField: "lastTotalProfitsDays",
       lastChartField: "lastTotalProfit",
       chartField: "totalProfit",
-      color: "#6200ff",
+      color: "#2f00ff",
    },
    {
       title: "فروش",
@@ -27,7 +27,7 @@ const reportsData = [
       lastField: "lastTotalPaymentsDays",
       lastChartField: "lastTotalPayment",
       chartField: "totalPayment",
-      color: "#04ff00",
+      color: "#6200ff",
    },
    {
       title: "سفارشات",
@@ -36,7 +36,7 @@ const reportsData = [
       lastField: "lastTotalOrdersDays",
       lastChartField: "lastTotalOrders",
       chartField: "totalOrders",
-      color: "#00e5ff",
+      color: "#ff0080",
    },
    {
       title: "کاربران",
@@ -45,7 +45,7 @@ const reportsData = [
       lastField: "lastTotalUsersDays",
       lastChartField: "lastTotalUsers",
       chartField: "totalUsers",
-      color: "rgb(90 100 255 / 100%)",
+      color: "#e100ff",
    },
    {
       title: "رضایت کاربران",
@@ -54,16 +54,23 @@ const reportsData = [
       lastField: "lastTotalAverageScoreDays",
       lastChartField: "lastAverageScore",
       chartField: "averageScore",
-      color: "#eeff00",
+      color: "#0fff13",
    },
 ];
+
 export function DashboardContext({ children }) {
    const { isError, isLoading, data } = useDashboard();
-   return (
-      <DashContext.Provider value={{ isError, isLoading, data, reportsData }}>
-         {children}
-      </DashContext.Provider>
-   );
+
+   const value = useMemo(() => {
+      return {
+         isError,
+         isLoading,
+         data,
+         reportsData,
+      };
+   }, [isLoading]);
+
+   return <DashContext.Provider value={value}>{children}</DashContext.Provider>;
 }
 
 export function useDataDashboard() {

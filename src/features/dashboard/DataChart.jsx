@@ -13,12 +13,15 @@ import { useDataDashboard } from "../../contexts/DashboardContext";
 import NumberComponent from "../../utils/helpers";
 import { useSearchParams } from "react-router-dom";
 import DashboardBox from "../../ui/DashboardBox";
+import Skeleton from "react-loading-skeleton";
+import { memo } from "react";
 
 const StyledSalesChart = styled(DashboardBox)`
    grid-column: 1 / -1;
    width: 100%;
    height: 100%;
    position: relative;
+   padding: 1.5rem 1rem 0rem 0rem;
    /* Hack to change grid line colors */
    & .recharts-cartesian-grid-horizontal line,
    & .recharts-cartesian-grid-vertical line {
@@ -66,8 +69,8 @@ const TooltipItem = styled.div`
    ${(props) => types[props.type]}
 `;
 
-const SalesChart = () => {
-   const { isError, isLoading, data, reportsData } = useDataDashboard();
+const SalesChart = memo(() => {
+   const { isLoading, data, reportsData } = useDataDashboard();
    const [searchParams, setSearchParams] = useSearchParams();
    const lastField = searchParams.get("report") || "lastTotalPaymentsDays";
 
@@ -75,133 +78,141 @@ const SalesChart = () => {
       (data) => data.lastField === lastField
    );
    return (
-      <StyledSalesChart>
-         {isError ? (
-            "Something wrong - error fetch"
+      <>
+         {isLoading ? (
+            <Skeleton height="100%" width="100%" borderRadius={50} />
          ) : (
-            <ResponsiveContainer height={300} width="100%">
-               <AreaChart
-                  key={lastChartField}
-                  data={data.currentMetrics.resultsDays}
-               >
-                  <CartesianGrid
-                     horizontal={false}
-                     opacity={0.5}
-                     strokeDasharray="5"
-                  />
-                  <XAxis
-                     dataKey="lastDate"
-                     tick={{ fill: colors.text, fontSize: 12 }}
-                     tickLine={false}
-                     axisLine={false}
-                     direction="rtl"
-                     tickFormatter={(value) => value}
-                  />
-                  <YAxis
-                     dataKey={lastChartField}
-                     tick={{ fill: colors.text, fontSize: 12 }}
-                     tickLine={false}
-                     axisLine={false}
-                     fontFamily="poppins"
-                     fontWeight="500"
-                     interval={1}
-                     direction="ltr"
-                     width={85}
-                     tickFormatter={(value) =>
-                        typeof value === "string"
-                           ? value
-                           : value.toLocaleString()
-                     }
-                  />
-                  <Tooltip
-                     contentStyle={{
-                        backgroundColor: colors.background,
-                        borderRadius: "5px",
-                     }}
-                     labelStyle={{ color: colors.text }}
-                     itemStyle={{ color: colors.text }}
-                     content={({ active, payload }) => {
-                        if (!active || !payload || payload.length === 0) {
-                           return null;
+            <StyledSalesChart>
+               <ResponsiveContainer height="100%" width="100%">
+                  <AreaChart
+                     key={lastChartField}
+                     data={data.currentMetrics.resultsDays}
+                  >
+                     <CartesianGrid
+                        horizontal={false}
+                        opacity={0.5}
+                        strokeDasharray="5"
+                     />
+                     <XAxis
+                        dataKey="lastDate"
+                        tick={{ fill: colors.text, fontSize: 12 }}
+                        tickLine={false}
+                        axisLine={false}
+                        direction="rtl"
+                        tickFormatter={(value) => value}
+                     />
+                     <YAxis
+                        dataKey={lastChartField}
+                        tick={{ fill: colors.text, fontSize: 12 }}
+                        tickLine={false}
+                        axisLine={false}
+                        fontFamily="poppins"
+                        fontWeight="500"
+                        interval={1}
+                        direction="ltr"
+                        width={85}
+                        tickFormatter={(value) =>
+                           typeof value === "string"
+                              ? value
+                              : value.toLocaleString()
                         }
+                     />
+                     <Tooltip
+                        contentStyle={{
+                           backgroundColor: colors.background,
+                           borderRadius: "5px",
+                        }}
+                        labelStyle={{ color: colors.text }}
+                        itemStyle={{ color: colors.text }}
+                        content={({ active, payload }) => {
+                           if (!active || !payload || payload.length === 0) {
+                              return null;
+                           }
 
-                        return (
-                           <TooltipContainer>
-                              <TooltipItem type="primary">
-                                 <NumberComponent
-                                    isAnimate={false}
-                                    type="tooltip"
-                                    number={payload[0].payload[lastChartField]}
-                                 />
-                              </TooltipItem>
-                              <TooltipItem type="secondary">
-                                 <NumberComponent
-                                    isAnimate={false}
-                                    type="tooltip"
-                                    number={payload[0].payload[chartField]}
-                                 />
-                              </TooltipItem>
-                           </TooltipContainer>
-                        );
-                     }}
-                  />
-                  <Area
-                     dataKey={lastChartField}
-                     type="monotone"
-                     stroke={color}
-                     fill={`url(#cyan-gradient-${lastField})`}
-                     strokeWidth={2}
-                     name={title}
-                  />
-                  <defs>
-                     <linearGradient
-                        id={`cyan-gradient-${lastField}`}
-                        x1="0"
-                        y1="0"
-                        x2="0"
-                        y2="1"
-                     >
-                        <stop offset="5%" stopColor={color} stopOpacity={0.9} />
-                        <stop
-                           offset="100%"
-                           stopColor={color}
-                           stopOpacity={0.01}
-                        />
-                     </linearGradient>
-                     <linearGradient
-                        id={`second-gradient-${lastField}`}
-                        x1="0"
-                        y1="0"
-                        x2="0"
-                        y2="1"
-                     >
-                        <stop
-                           offset="100%"
-                           stopColor={color}
-                           stopOpacity={0.2}
-                        />
-                        <stop
-                           offset="100%"
-                           stopColor={color}
-                           stopOpacity={0.1}
-                        />
-                     </linearGradient>
-                  </defs>
-                  <Area
-                     dataKey={chartField}
-                     type="monotone"
-                     stroke={color}
-                     fill={`url(#second-gradient-${lastField})`}
-                     strokeDasharray="10"
-                     strokeOpacity={0.7}
-                     strokeWidth={2}
-                     name={title}
-                  />
-               </AreaChart>
-            </ResponsiveContainer>
+                           return (
+                              <TooltipContainer>
+                                 <TooltipItem type="primary">
+                                    <NumberComponent
+                                       isAnimate={false}
+                                       type="tooltip"
+                                       number={
+                                          payload[0].payload[lastChartField]
+                                       }
+                                    />
+                                 </TooltipItem>
+                                 <TooltipItem type="secondary">
+                                    <NumberComponent
+                                       isAnimate={false}
+                                       type="tooltip"
+                                       number={payload[0].payload[chartField]}
+                                    />
+                                 </TooltipItem>
+                              </TooltipContainer>
+                           );
+                        }}
+                     />
+                     <Area
+                        dataKey={lastChartField}
+                        type="monotone"
+                        stroke={color}
+                        fill={`url(#cyan-gradient-${lastField})`}
+                        strokeWidth={2}
+                        name={title}
+                     />
+                     <defs>
+                        <linearGradient
+                           id={`cyan-gradient-${lastField}`}
+                           x1="0"
+                           y1="0"
+                           x2="0"
+                           y2="1"
+                        >
+                           <stop
+                              offset="5%"
+                              stopColor={color}
+                              stopOpacity={0.9}
+                           />
+                           <stop
+                              offset="100%"
+                              stopColor={color}
+                              stopOpacity={0.01}
+                           />
+                        </linearGradient>
+                        <linearGradient
+                           id={`second-gradient-${lastField}`}
+                           x1="0"
+                           y1="0"
+                           x2="0"
+                           y2="1"
+                        >
+                           <stop
+                              offset="100%"
+                              stopColor={color}
+                              stopOpacity={0.2}
+                           />
+                           <stop
+                              offset="100%"
+                              stopColor={color}
+                              stopOpacity={0.1}
+                           />
+                        </linearGradient>
+                     </defs>
+                     <Area
+                        dataKey={chartField}
+                        type="monotone"
+                        stroke={color}
+                        fill={`url(#second-gradient-${lastField})`}
+                        strokeDasharray="10"
+                        strokeOpacity={0.7}
+                        strokeWidth={2}
+                        name={title}
+                     />
+                  </AreaChart>
+               </ResponsiveContainer>
+            </StyledSalesChart>
          )}
-      </StyledSalesChart>
+      </>
    );
-};
+})
 
 export default SalesChart;

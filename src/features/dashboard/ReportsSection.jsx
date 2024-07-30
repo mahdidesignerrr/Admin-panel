@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useDataDashboard } from "../../contexts/DashboardContext";
 import DashboardBox from "../../ui/DashboardBox";
 import Stats from "../../ui/Stat";
+import { memo } from "react";
 
 
 const StyledStats = styled(DashboardBox)`
@@ -14,13 +15,14 @@ const StyledStats = styled(DashboardBox)`
    gap: 1.5rem;
    padding: 2rem;
    &::before {
-      display: none;
-      /* height: 100%;
-      backdrop-filter: blur(200px); */
+      height: 100%;
+      width: 100%;
+      filter: blur(400px);
+      opacity: 0.15;
    }
 `;
 
-function ReportsSection() {
+const ReportsSection = memo(function ReportsSection() {
    const { reportsData } = useDataDashboard();
    return (
       <StyledStats>
@@ -29,6 +31,6 @@ function ReportsSection() {
          ))}
       </StyledStats>
    );
-}
+})
 
 export default ReportsSection;

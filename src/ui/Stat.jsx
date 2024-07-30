@@ -5,6 +5,7 @@ import StateChart from "../features/dashboard/StateChart";
 import { useDataDashboard } from "../contexts/DashboardContext";
 import { useSearchParams } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
+import { memo } from "react";
 
 const StyledStat = styled.div`
    display: flex;
@@ -51,9 +52,9 @@ const StyledStat = styled.div`
       position: absolute;
       filter: blur(50px);
       background: linear-gradient(
-         30deg,
-         #000 60%,
-         ${(props) => props.color || "rgb(79 00 255 / 100%)"} 40%
+         45deg,
+         #080808 55%,
+         ${(props) => props.color || "rgb(79 00 255 / 100%)"} 45%
       );
       z-index: -1;
       right: 0%;
@@ -92,7 +93,7 @@ const RightSection = styled.div`
    gap: 0.5rem;
    height: 100%;
    width: 100%;
-   cursor: pointer;
+   cursor: ${props => props.$isActive ? "auto" : "pointer"};
 `;
 
 const PercentBox = styled.div`
@@ -112,7 +113,7 @@ const PercentBox = styled.div`
    box-shadow: var(--shadow-sm);
 `;
 
-function Stats({ color, title, field, lastField, icon, chartField }) {
+const Stats = memo(function Stats({ color, title, field, lastField, icon, chartField }) {
    const { isLoading, data } = useDataDashboard();
    const [searchParams, setSearchParams] = useSearchParams();
 
@@ -125,6 +126,7 @@ function Stats({ color, title, field, lastField, icon, chartField }) {
 
    const isActive = currentFilter === lastField;
    function handleClick() {
+      if(isActive) return null
       searchParams.set("report", lastField);
       setSearchParams(searchParams);
    }
@@ -143,7 +145,7 @@ function Stats({ color, title, field, lastField, icon, chartField }) {
                   <Skeleton height={1000} width={1000} />
                ) : (
                   <>
-                     <RightSection>
+                     <RightSection $isActive={isActive}>
                         <LabelSection $isActive={isActive}>
                            <Icon>{icon}</Icon>
                            <h2>{title}</h2>
@@ -162,6 +164,6 @@ function Stats({ color, title, field, lastField, icon, chartField }) {
                )}
       </StyledStat>
    );
-}
+})
 
 export default Stats;

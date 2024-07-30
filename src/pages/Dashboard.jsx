@@ -1,4 +1,4 @@
-import { DashboardContext, useDataDashboard } from "../contexts/DashboardContext";
+import { DashboardContext } from "../contexts/DashboardContext";
 import DashboardLayout from "../features/dashboard/DashboardLayout";
 import DashboardTopSection from "../features/dashboard/DashboardTopSection";
 
@@ -7,8 +7,8 @@ function Dashboard() {
       <>
          <DashboardContext>
             <DashboardTopSection/>
-            <DashboardLayout />
          </DashboardContext>
+            <DashboardLayout />
       </>
    );
 }

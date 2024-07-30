@@ -48,7 +48,7 @@ const StyledNumber = styled.h2`
    }
 
    .middle-three {
-      color: var(--color-grey-600);
+      color: var(--color-grey-700);
    }
 
    .last-three {
@@ -62,6 +62,7 @@ StyledNumber.defaultProps = {
 
 // Function to format numbers with optional animation
 const formatNumber = (number, isAnimate) => {
+   if(!number) return 0
    const numStr = number.toString();
    const length = numStr.length;
    let firstPart = "";
