@@ -13,5 +13,13 @@ const Icon = styled.div`
   border-radius: var(--border-radius-lg);
   width: 50px;
   color: var(--color-grey-100);
+  @media screen and (max-width: 768px) {
+      width: 45px;
+      height: 45px;
+      & svg {
+        width: 22px;
+        height: 22px;
+      }
+   }
 `
 export default Icon

@@ -1,18 +1,23 @@
 import styled, { css } from "styled-components";
-import { AnimatePresence, motion } from "framer-motion";
-
-// Define animation settings
-const slideIn = {
-   initial: { scale: 0.9, opacity: 0.1 },
-   animate: { scale: 1, opacity: 1 },
-   exit: { scale: 0.9, opacity: 0.1 },
-};
+import { motion } from "framer-motion";
 
 const types = {
    primary: css`
-      font-size: 5.5rem;
+      font-size: 5.2rem;
       .last-three {
-         font-size: 3.5rem;
+         font-size: 3.4rem;
+      }
+      @media screen and (max-width: 990px) {
+         font-size: 3.2rem;
+         .last-three {
+            font-size: 2rem;
+         }
+      }
+      @media screen and (max-width: 480px) {
+         font-size: 4rem;
+         .last-three {
+            font-size: 3rem;
+         }
       }
    `,
    secondary: css`
@@ -20,11 +25,23 @@ const types = {
       .last-three {
          font-size: 2.5rem;
       }
+      @media screen and (max-width: 990px) {
+         font-size: 2.7rem;
+         .last-three {
+            font-size: 1.8rem;
+         }
+      }
    `,
-   tertiary: css`
+   thirty: css`
       font-size: 2.5rem;
       .last-three {
          font-size: 1.8rem;
+      }
+      @media screen and (max-width: 768px) {
+         font-size: 2rem;
+         .last-three {
+            font-size: 1.5rem;
+         }
       }
    `,
    tooltip: css`
@@ -36,7 +53,7 @@ const types = {
 };
 
 const StyledNumber = styled.h2`
-   font-family: poppins;
+   font-family: "Poppins";
    font-weight: 600;
    display: flex;
    direction: ltr;
@@ -48,7 +65,7 @@ const StyledNumber = styled.h2`
    }
 
    .middle-three {
-      color: var(--color-grey-700);
+      color: var(--color-grey-600);
    }
 
    .last-three {
@@ -60,9 +77,8 @@ StyledNumber.defaultProps = {
    type: "secondary",
 };
 
-// Function to format numbers with optional animation
 const formatNumber = (number, isAnimate) => {
-   if(!number) return 0
+   if (!number) return 0;
    const numStr = number.toString();
    const length = numStr.length;
    let firstPart = "";
@@ -93,9 +109,19 @@ const formatNumber = (number, isAnimate) => {
                className="first-part"
                key={`first-part-${firstPart}`}
                initial={isAnimate ? { opacity: 0, y: 30 } : {}}
-               animate={isAnimate ? { opacity: 1, y: 0, transition: { ease: "easeOut", duration: 0.4 } } : {}}
+               animate={
+                  isAnimate
+                     ? {
+                          opacity: 1,
+                          y: 0,
+                          transition: { ease: "easeOut", duration: 0.4 },
+                       }
+                     : {}
+               }
             >
-               {numStr.includes("%") || numStr.includes(".") ? numStr : `${firstPart},`}
+               {numStr.includes("%") || numStr.includes(".")
+                  ? numStr
+                  : `${firstPart},`}
             </motion.span>
          )}
          {middleThree && (
@@ -103,7 +129,19 @@ const formatNumber = (number, isAnimate) => {
                className="middle-three"
                key={`middle-three-${middleThree}`}
                initial={isAnimate ? { opacity: 0, y: 20 } : {}}
-               animate={isAnimate ? { opacity: 1, y: 0, transition: { ease: "easeOut", duration: 0.4, delay: 0.15 } } : {}}
+               animate={
+                  isAnimate
+                     ? {
+                          opacity: 1,
+                          y: 0,
+                          transition: {
+                             ease: "easeOut",
+                             duration: 0.4,
+                             delay: 0.15,
+                          },
+                       }
+                     : {}
+               }
             >
                {middleThree}
             </motion.span>
@@ -113,7 +151,19 @@ const formatNumber = (number, isAnimate) => {
                className="last-three"
                key={`last-three-${lastThree}`}
                initial={isAnimate ? { opacity: 0, y: 10 } : {}}
-               animate={isAnimate ? { opacity: 1, y: 0, transition: { ease: "easeOut", duration: 0.4, delay: 0.3 } } : {}}
+               animate={
+                  isAnimate
+                     ? {
+                          opacity: 1,
+                          y: 0,
+                          transition: {
+                             ease: "easeOut",
+                             duration: 0.4,
+                             delay: 0.3,
+                          },
+                       }
+                     : {}
+               }
             >
                ,{lastThree}
             </motion.span>
@@ -123,7 +173,9 @@ const formatNumber = (number, isAnimate) => {
 };
 
 const NumberComponent = ({ type, number, isAnimate = true }) => {
-   return <StyledNumber type={type}>{formatNumber(number, isAnimate)}</StyledNumber>;
+   return (
+      <StyledNumber type={type}>{formatNumber(number, isAnimate)}</StyledNumber>
+   );
 };
 
 export default NumberComponent;

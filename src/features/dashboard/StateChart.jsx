@@ -14,11 +14,10 @@ const StyledReportChart = styled.div`
 `;
 
 function StateChart({ field, color }) {
-   const { isError, isLoading, data } = useDataDashboard();
-
+   const { data } = useDataDashboard();
    return (
       <StyledReportChart>
-         <ResponsiveContainer height="80%" width="100%">
+         <ResponsiveContainer minHeight={20} minWidth={20} height="80%" width="100%">
             <AreaChart data={data.currentMetrics.resultsDays}>
                <defs>
                   <linearGradient

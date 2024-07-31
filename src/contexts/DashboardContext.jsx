@@ -6,6 +6,7 @@ import {
    IconStarWithSpeed,
    IconThreeUsers,
    IconReceiptFront,
+   IconWalletMoney,
 } from "../styles/Icons";
 
 const DashContext = createContext();
@@ -22,7 +23,7 @@ const reportsData = [
    },
    {
       title: "فروش",
-      icon: <IconReceipt />,
+      icon: <IconWalletMoney />,
       field: "totalPaymentsDays",
       lastField: "lastTotalPaymentsDays",
       lastChartField: "lastTotalPayment",
@@ -31,7 +32,7 @@ const reportsData = [
    },
    {
       title: "سفارشات",
-      icon: <IconReceiptFront />,
+      icon: <IconReceipt />,
       field: "totalOrdersDays",
       lastField: "lastTotalOrdersDays",
       lastChartField: "lastTotalOrders",
@@ -68,7 +69,7 @@ export function DashboardContext({ children }) {
          data,
          reportsData,
       };
-   }, [isLoading]);
+   }, [isLoading, data,isError]);
 
    return <DashContext.Provider value={value}>{children}</DashContext.Provider>;
 }

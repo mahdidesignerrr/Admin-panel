@@ -29,6 +29,7 @@ const StyledSalesChart = styled(DashboardBox)`
    }
 `;
 
+
 const colors = {
    lastTotalPayments: {
       stroke: "#2450ff",
@@ -73,7 +74,6 @@ const SalesChart = memo(() => {
    const { isLoading, data, reportsData } = useDataDashboard();
    const [searchParams, setSearchParams] = useSearchParams();
    const lastField = searchParams.get("report") || "lastTotalPaymentsDays";
-
    const { color, title, lastChartField, chartField } = reportsData.find(
       (data) => data.lastField === lastField
    );
@@ -83,7 +83,7 @@ const SalesChart = memo(() => {
             <Skeleton height="100%" width="100%" borderRadius={50} />
          ) : (
             <StyledSalesChart>
-               <ResponsiveContainer height="100%" width="100%">
+               <ResponsiveContainer minHeight={20} minWidth={20} height="100%" width="100%">
                   <AreaChart
                      key={lastChartField}
                      data={data.currentMetrics.resultsDays}
@@ -91,7 +91,6 @@ const SalesChart = memo(() => {
                      <CartesianGrid
                         horizontal={false}
                         opacity={0.5}
-                        strokeDasharray="5"
                      />
                      <XAxis
                         dataKey="lastDate"
@@ -101,12 +100,12 @@ const SalesChart = memo(() => {
                         direction="rtl"
                         tickFormatter={(value) => value}
                      />
-                     <YAxis
+                     {window.innerWidth > 768 &&<YAxis
                         dataKey={lastChartField}
                         tick={{ fill: colors.text, fontSize: 12 }}
                         tickLine={false}
                         axisLine={false}
-                        fontFamily="poppins"
+                        fontFamily="Poppins"
                         fontWeight="500"
                         interval={1}
                         direction="ltr"
@@ -116,7 +115,7 @@ const SalesChart = memo(() => {
                               ? value
                               : value.toLocaleString()
                         }
-                     />
+                     /> }
                      <Tooltip
                         contentStyle={{
                            backgroundColor: colors.background,

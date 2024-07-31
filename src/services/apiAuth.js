@@ -1,4 +1,3 @@
-import toast from "react-hot-toast"
 import { apiUrl, handleErrorApis, version } from "./apiConfigs"
 
 export const getStoreInfo = async () => {

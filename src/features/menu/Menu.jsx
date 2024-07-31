@@ -115,10 +115,10 @@ function MenuContainer() {
 function MenuCategories({ children }) {
    const { category } = useContext(MenuContext);
    return (
-   <StyledCategories variants={itemVariants} key={category}>
-      {children}
-   </StyledCategories>
-   )
+      <StyledCategories variants={itemVariants} key={category}>
+         {children}
+      </StyledCategories>
+   );
 }
 
 MenuAppLayout.TitleSection = MenuTitleSection;

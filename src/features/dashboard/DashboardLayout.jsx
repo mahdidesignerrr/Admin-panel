@@ -1,17 +1,18 @@
 import styled from "styled-components";
 import ReportsSection from "./ReportsSection";
 import DataChart from "./DataChart";
-import {
-   DashboardContext,
-} from "../../contexts/DashboardContext";
+import { DashboardContext } from "../../contexts/DashboardContext";
 import ActivitySection from "./ActivitySection";
 
 const StyledDashboardLayout = styled.div`
    display: flex;
-   justify-content: center;
+   justify-content: start;
    align-items: center;
-   height: 120vh;
+   height: 135vh;
    gap: 1.5rem;
+   @media screen and (max-width: 770px) {
+      height: auto;
+   }
 `;
 
 const RightSection = styled.div`
@@ -22,32 +23,32 @@ const RightSection = styled.div`
    gap: 1.5rem;
    height: 100%;
    width: 65%;
+   @media screen and (max-width: 1100px) {
+      width: 100%;
+   }
 `;
 
 const ChartContainer = styled.div`
    height: 40%;
    width: 100%;
+   @media screen and (max-width: 770px) {
+      height: 25rem;
+   }
 `;
 
 const ActivityContainer = styled.div`
    /* background: yellow; */
    height: 80%;
    width: 100%;
+   @media screen and (max-width: 770px) {
+      height: auto;
+   }
 `;
 
 const ReportsContainer = styled.div`
    height: 100%;
    width: 35%;
 `;
-
-// const TopContainer = styled.div`
-//    display: flex;
-//    justify-content: space-between;
-//    align-items: center;
-// `;
-// const showMore = styled.div`
-
-// `;
 
 function DashboardLayout() {
    return (
@@ -61,9 +62,11 @@ function DashboardLayout() {
                   <ActivitySection />
                </ActivityContainer>
             </RightSection>
-            <ReportsContainer>
-               <ReportsSection />
-            </ReportsContainer>
+            {window.innerWidth > 1100 && (
+               <ReportsContainer>
+                  <ReportsSection />
+               </ReportsContainer>
+            )}
          </DashboardContext>
       </StyledDashboardLayout>
    );

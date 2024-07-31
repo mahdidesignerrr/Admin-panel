@@ -16,6 +16,7 @@ const types = {
       background-color: var(--backdrop-color);
       height: 9rem !important;
       box-shadow: var(--shadow-inset), var(--shadow-lg);
+      font-weight:500;
       &:hover {
          box-shadow: var(--shadow-inset-bot), var(--shadow-sm) !important;
       }
@@ -108,8 +109,7 @@ const MenuContent = styled(motion.div)`
    justify-content: center;
    align-items: center;
    gap: 1rem;
-   font-size: 1.5rem;
-
+   font-size: 1.4rem;
    @media screen and (max-width: 900px) {
       flex-direction: column-reverse;
       font-size: 1.3rem;
@@ -129,6 +129,7 @@ const MenuActive = styled(motion.div)`
 
 const MenuTitle = styled(motion.h3)`
    animation: showTitle 0.5s ease-in-out;
+   font-weight:600;
 
    @keyframes showTitle {
       0% {
@@ -183,6 +184,6 @@ const Navbar = memo(function Navbar({ icon, name, link, type = "secondary" }) {
          </MenuContent>
       </Menu>
    );
-})
+});
 
 export default Navbar;

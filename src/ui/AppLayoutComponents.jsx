@@ -9,7 +9,7 @@ export const StyledAppLayout = styled.div`
    justify-content: center;
    align-items: end;
 
-   @media screen and (max-width: 770px) {
+   @media screen and (max-width: 768px) {
       background: url("../../Gradient-For-Project-Mobile.jpg") 15% 80%;
    }
 `;
@@ -25,31 +25,10 @@ export const Main = styled.main`
    overflow-y: scroll;
    width: 100%;
 
-   &::-webkit-scrollbar {
-      width: 12px;
-   }
-
-   &::-webkit-scrollbar-track {
-      border-radius: 10px;
-      margin-top: 55px; /* Adjust this value */
-      border: 2px solid #3c414896;
-      
-   }
-   
-   &::-webkit-scrollbar-thumb {
-      background: var(--color-grey-300);
-      border-radius: 10px;
-      border: 2px solid var(--color-grey-100);
-   }
-
-   &::-webkit-scrollbar-thumb:hover {
-     background: var(--color-grey-200);
-   }
-
-   @media screen and (max-width: 770px) {
+   @media screen and (max-width: 1150px) {
       border-top-right-radius: 5rem;
       border-top-left-radius: 5rem;
-      padding: 2.5rem 2.5rem 12rem;
+      padding: 1.2rem 1.2rem 14rem;
    }
 `;
 

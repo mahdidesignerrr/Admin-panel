@@ -1,27 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-
 const GlobalStyles = createGlobalStyle`
-
-@font-face {
-  font-family: "Morabba";
-  font-weight: 500;
-  src: url("../../public/Morabba/Morabba-Medium.ttf");
-  font-display: fallback
-}
-
-@font-face {
-  font-family: "Morabba";
-  font-weight: 600;
-  src: url("./../public/Morabba/Morabba-SemiBold.ttf");
-  font-display: fallback
-}
-
-@font-face {
-  font-family: "Morabba";
-  font-weight: 700;
-  src: url("./../public/Morabba/Morabba-Bold.ttf");
-  font-display: fallback
-}
 :root {
   
   &, &.dark-mode {
@@ -157,6 +135,52 @@ const GlobalStyles = createGlobalStyle`
 html {
   font-size: 62.5%;
 }
+::-webkit-scrollbar {
+      width: 12px;
+   }
+
+   ::-webkit-scrollbar-track {
+      border-radius: 10px;
+      margin-top: 55px; /* Adjust this value */
+      border: 2px solid #3c414896;
+   }
+
+   ::-webkit-scrollbar-thumb {
+      background: var(--color-grey-300);
+      border-radius: 10px;
+      border: 2px solid var(--color-grey-100);
+   }
+
+   ::-webkit-scrollbar-thumb:hover {
+      background: var(--color-grey-200);
+   }
+
+   /* Hide scrollbar on mobile screens */
+   @media screen and (max-width: 768px) {
+      ::-webkit-scrollbar {
+         display: none;
+      }
+   }
+@font-face {
+  font-family: "Morabba";
+  font-weight: 500;
+  src: url("/fonts/Morabba/Morabba-Medium.ttf");
+  font-display: fallback
+}
+
+@font-face {
+  font-family: "Morabba";
+  font-weight: 600;
+  src: url("/fonts/Morabba/Morabba-SemiBold.ttf");
+  font-display: fallback
+}
+
+@font-face {
+  font-family: "Morabba";
+  font-weight: 700;
+  src: url("/fonts/Morabba/Morabba-Bold.ttf");
+  font-display: fallback
+}
 
 body {
   font-family: "Morabba", sans-serif;
@@ -219,6 +243,7 @@ h5,
 h6 {
   overflow-wrap: break-word;
   hyphens: auto;
+  font-weight: 600;
 }
 
 img {

@@ -16,4 +16,7 @@ export const ActivityBox = styled.div`
    &:hover {
       box-shadow: var(--shadow-inset-bot), var(--shadow-sm) !important;
    }
+   @media screen and (max-width: 770px) {
+      width: 100%
+   }
 `;

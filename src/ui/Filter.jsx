@@ -9,8 +9,15 @@ const StyledFilter = styled.div`
    border-radius: var(--border-radius-lg);
    padding: 0.5rem;
    display: flex;
+   max-width: 225px;
+   max-height: 50px;
    flex-direction: row-reverse;
    gap: 1rem;
+   @media screen and (max-width: 480px) {
+      background-color: transparent;
+      backdrop-filter: none;
+      border: 0px;
+   }
 `;
 
 const FilterButton = styled.button`
@@ -29,9 +36,11 @@ const FilterButton = styled.button`
    border-radius: var(--border-radius-lg);
    font-weight: 500;
    font-size: 1.5rem;
-   padding: 1rem 1.7rem;
+   padding: 1rem 1.5rem;
    transition: all 0.4s ease-out;
-
+   display: flex;
+   justify-content: center;
+   align-items: center;
    &:not(:disabled) {
       color: var(--color-grey-600);
    }

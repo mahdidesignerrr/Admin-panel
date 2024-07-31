@@ -11,7 +11,7 @@ export  function useAdminToken() {
 
   useEffect(() => {
     setAdminToken(document.cookie.match(/token=([^;]+)/)?.[1]);
-  });
+  }, []);
 
   if(!adminToken) {
     toast.error("لطفا جهت حفظ امنیت حساب شما وارد شوید", {

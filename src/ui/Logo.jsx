@@ -1,11 +1,16 @@
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import SideBar from "./SideBar";
 
 const LogoContents = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: end;
   align-items: center;
   width: 100%;
+  @media screen and (max-width: 1100px) {
+    & h2 {
+      display: none;
+    }
+  }
 `;
 
 const StyledLogo = styled.img`

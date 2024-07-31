@@ -4,7 +4,6 @@ import NumberComponent, { percentage } from "../utils/helpers";
 import StateChart from "../features/dashboard/StateChart";
 import { useDataDashboard } from "../contexts/DashboardContext";
 import { useSearchParams } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
 import { memo } from "react";
 
 const StyledStat = styled.div`
@@ -83,21 +82,27 @@ const LabelSection = styled.div`
       font-size: 2.5rem;
       word-break: break-all;
    }
+   @media screen and (max-width: 480px) {
+      & h2 {
+      font-size: 2rem;
+      word-break: break-all;
+   }
+   }
 `;
 
 const RightSection = styled.div`
    display: flex;
    justify-content: center;
-   align-items: start;
+   align-items: flex-start;
    flex-direction: column;
-   gap: 0.5rem;
+   gap: 0.8rem;
    height: 100%;
    width: 100%;
    cursor: ${(props) => (props.$isActive ? "auto" : "pointer")};
 `;
 
 const PercentBox = styled.div`
-   font-family: poppins;
+   font-family: "oppins";
    font-weight: 600;
    direction: ltr;
    width: 35%;
@@ -120,6 +125,7 @@ const Stats = memo(function Stats({
    lastField,
    icon,
    chartField,
+   handleClose
 }) {
    const { isLoading, data } = useDataDashboard();
    const [searchParams, setSearchParams] = useSearchParams();
@@ -136,6 +142,7 @@ const Stats = memo(function Stats({
       if (isActive) return null;
       searchParams.set("report", lastField);
       setSearchParams(searchParams);
+      handleClose?.()
    }
 
    const percentChange = percentage(amount, lastAmount);

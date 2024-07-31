@@ -37,8 +37,10 @@ function App() {
    const queryClient = new QueryClient({
       defaultOptions: {
          queries: {
-            // staleTime: 60 * 1000,
-            staleTime: 0,
+            staleTime: 90 * 1000,
+            refetchOnWindowFocus: true,
+            refetchOnReconnect:true,
+            retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000)
          },
       },
    });

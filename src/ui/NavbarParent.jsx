@@ -2,7 +2,13 @@ import styled from "styled-components";
 import Navbar from "./Navbar";
 import Logo from "./Logo";
 import Account from "./Account";
-import { IconComment, IconDashboard, IconOrders, IconProduct } from "../styles/Icons";
+import {
+   IconComment,
+   IconDashboard,
+   IconMenu,
+   IconOrders,
+   IconProduct,
+} from "../styles/Icons";
 import { memo, useMemo } from "react";
 
 const StyledNavbar = styled.div`
@@ -14,13 +20,16 @@ const StyledNavbar = styled.div`
    display: flex;
    align-items: center;
    justify-content: space-between;
-   @media screen and (max-width: 770px) {
-      padding: 1.2rem 1.5rem;
+   @media screen and (max-width: 480px) {
+      padding: 1rem;
    }
 `;
 
 const LogoContainer = styled.div`
    flex-grow: 1;
+   @media screen and (max-width: 1100px) {
+      flex-grow: 0;
+   }
 `;
 
 const MenuContainer = styled.div`
@@ -37,9 +46,10 @@ const MenuContainer = styled.div`
    border: 2px solid #33383fa3;
 
    @media screen and (max-width: 900px) {
-      position: absolute;
-      bottom: 6rem;
+      position: fixed;
+      bottom: 5rem;
       width: 94vw;
+      max-width: 50rem;
       left: 50%;
       right: 50%;
       transform: translate(-50%, 50%);
@@ -52,14 +62,17 @@ const AccountContainer = styled.div`
 `;
 
 const NavbarParent = memo(function NavbarParent() {
-   const menuItems = useMemo(() => [
-      { name: "داشبورد", link: "dashboard", icon: <IconDashboard /> },
-      { name: "محصولات", link: "products", icon: <IconProduct /> },
-      { name: "سفارشات", link: "orders", icon: <IconOrders /> },
-      { name: "کامنت ها", link: "Comments", icon: <IconComment /> },
-      { name: "منو", link: "menu", icon: <IconComment /> },
-   ], []);
- 
+   const menuItems = useMemo(
+      () => [
+         { name: "داشبورد", link: "dashboard", icon: <IconDashboard /> },
+         { name: "محصولات", link: "products", icon: <IconProduct /> },
+         { name: "سفارشات", link: "orders", icon: <IconOrders /> },
+         { name: "کامنت ها", link: "Comments", icon: <IconComment /> },
+         { name: "منو", link: "menu", icon: <IconMenu /> },
+      ],
+      []
+   );
+
    return (
       <StyledNavbar>
          <AccountContainer>
@@ -80,7 +93,6 @@ const NavbarParent = memo(function NavbarParent() {
          </LogoContainer>
       </StyledNavbar>
    );
- });
- 
+});
 
 export default NavbarParent;

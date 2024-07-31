@@ -6,6 +6,7 @@ export const Status = styled.div`
    color: var(--color-green-500);
    gap: 0.6rem;
    font-size: 1.4rem;
+   font-weight: 600;
    & div {
       width: 5px;
       height: 5px;

@@ -3,11 +3,10 @@ import { percentage } from "../../utils/helpers";
 import DashboardFilter from "./DashboardFilter";
 import { useSearchParams } from "react-router-dom";
 import { useDataDashboard } from "../../contexts/DashboardContext";
-import SpinnerMini from "../../ui/SpinnerMini";
 import { IconGrowOrDown } from "../../styles/Icons";
 import Skeleton from "react-loading-skeleton";
 import StatHeading from "../../ui/StatHeading";
-import { memo, useMemo } from "react";
+import { memo } from "react";
 
 const TopSection = styled.div`
    width: 100%;
@@ -16,7 +15,11 @@ const TopSection = styled.div`
    justify-content: space-between;
    align-items: center;
    height: 18vh;
-   /* background: #ffffff43; */
+   @media screen and (max-width: 480px) {
+     flex-direction: column-reverse;
+     height: 16rem;
+     justify-content: start;
+   }
 `;
 
 const types = {
@@ -37,6 +40,9 @@ const Label = styled.p`
    padding-right: 5px;
    font-size: ${(props) => props.fontSize || "1.7rem"};
    color: var(--color-grey-500);
+      @media screen and (max-width: 480px) {
+      display: none;
+   }
 `;
 
 const LabelSection = styled.div`
@@ -70,14 +76,16 @@ const DashboardTopSection = memo(function DashboardTopSection() {
          label: "میزان تغییر",
          amount: percentChange,
          icon: <IconGrowOrDown />,
+         responsive: "first"
       },
       {
          label: `${title} در ${time} گذشته`,
          amount: data?.currentMetrics[field],
          icon,
+         responsive: "second"
       },
       {
-         label: title,
+         label: `${title} این ${time}`,
          amount: data?.currentMetrics[lastField],
          icon,
          type: "primary",
@@ -96,7 +104,7 @@ const DashboardTopSection = memo(function DashboardTopSection() {
                <DashboardFilter />
             )}
          </LabelSection>
-         {stats.map(({ label, amount, type = "secondary", icon }, i) => (
+         {stats.map(({ label, amount,responsive = "notThing", type = "secondary", icon }, i) => (
             <StatHeading
                key={label}
                isLoading={isLoading}
@@ -104,6 +112,8 @@ const DashboardTopSection = memo(function DashboardTopSection() {
                type={type}
                amount={amount}
                icon={icon}
+               $responsive={responsive}
+               $forDashboard={true}
             />
          ))}
       </TopSection>

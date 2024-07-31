@@ -6,7 +6,7 @@ const DashboardBox = styled.div`
    backdrop-filter: var(--filter-blur-md);
    border: 2px solid #42139a;
    border-radius: var(--border-radius-lg);
-   padding: 1.5rem 1.5rem;
+   padding: 1.6rem;
    display: flex;
    flex-direction: column;
    gap: 2.4rem;
